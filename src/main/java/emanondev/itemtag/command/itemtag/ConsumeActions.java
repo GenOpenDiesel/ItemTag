@@ -122,8 +122,8 @@ public class ConsumeActions extends ListenerSubCmd {
                 sendLanguageString("feedback.actions.permission.removed", null, p);
             }
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, getLanguageString("permission.params", null, p),
-                    getLanguageStringList("permission.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("permission.params", null, p),
+                    translateList("permission.description", null, p)));
         }
     }
 
@@ -141,8 +141,8 @@ public class ConsumeActions extends ListenerSubCmd {
                 sendLanguageString("feedback.actions.cooldownid.removed", null, p);
             }
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, getLanguageString("cooldownid.params", null, p),
-                    getLanguageStringList("cooldownid.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("cooldownid.params", null, p),
+                    translateList("cooldownid.description", null, p)));
         }
     }
 
@@ -160,8 +160,8 @@ public class ConsumeActions extends ListenerSubCmd {
                 sendLanguageString("feedback.actions.cooldown.removed", null, p);
             }
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, getLanguageString("cooldown.params", null, p),
-                    getLanguageStringList("cooldown.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("cooldown.params", null, p),
+                    translateList("cooldown.description", null, p)));
         }
     }
 
@@ -205,8 +205,8 @@ public class ConsumeActions extends ListenerSubCmd {
             sendLanguageString("feedback.actions.set", null, p, "%line%",
                     String.valueOf(line + 1), "%action%", action.replace(TYPE_SEPARATOR, " "));
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, getLanguageString("set.params", null, p),
-                    getLanguageStringList("set.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("set.params", null, p),
+                    translateList("set.description", null, p)));
         }
     }
 
@@ -229,8 +229,8 @@ public class ConsumeActions extends ListenerSubCmd {
             sendLanguageString("feedback.actions.remove", null, p, "%line%",
                     String.valueOf(line + 1), "%action%", action.replace(TYPE_SEPARATOR, " "));
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, getLanguageString("remove.params", null, p),
-                    getLanguageStringList("remove.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("remove.params", null, p),
+                    translateList("remove.description", null, p)));
         }
     }
 
@@ -273,8 +273,8 @@ public class ConsumeActions extends ListenerSubCmd {
                     action.replace(TYPE_SEPARATOR, " "));
         } catch (Exception e) {
             e.printStackTrace();
-            Util.sendMessage(p, this.craftFailFeedback(label, getLanguageString("add.params", null, p),
-                    getLanguageStringList("add.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("add.params", null, p),
+                    translateList("add.description", null, p)));
         }
     }
 
@@ -317,8 +317,8 @@ public class ConsumeActions extends ListenerSubCmd {
             sendLanguageString("feedback.actions.add", null, p, "%action%",
                     action.replace(TYPE_SEPARATOR, " "));
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, getLanguageString("addline.params", null, p),
-                    getLanguageStringList("addline.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("addline.params", null, p),
+                    translateList("addline.description", null, p)));
         }
     }
 

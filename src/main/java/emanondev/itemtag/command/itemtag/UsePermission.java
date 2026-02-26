@@ -69,25 +69,25 @@ public class UsePermission extends ListenerSubCmd {
                 String permission = args.length == 2 ? null : args[2].toLowerCase(Locale.ENGLISH);
                 setUseKey(tagItem, permission);
                 String feedback;
-                if (permission!=null) {
-                    feedback = getLanguageString("setpermission.feedback", null, p, "%value%", permission);
+                if (permission != null) {
+                    feedback = translate("setpermission.feedback", null, p, "%value%", permission);
                 } else {
-                    feedback = getLanguageString("setpermission.feedback-reset", null, p);
+                    feedback = translate("setpermission.feedback-reset", null, p);
                 }
-                Util.sendMessage(p,feedback);
+                Util.sendMessage(p, feedback);
                 return;
             }
             case "setmessage": {
                 if (args.length == 2) {
                     setUseMsgKey(tagItem, null);
-                    String feedback = getLanguageString("setmessage.feedback-reset", null, p);
-                    Util.sendMessage(p,feedback);
+                    String feedback = translate("setmessage.feedback-reset", null, p);
+                    Util.sendMessage(p, feedback);
                     return;
                 }
                 String msg = UtilsString.fix(String.join(" ", Arrays.asList(args).subList(2, args.length)), null, true);
                 setUseMsgKey(tagItem, msg);
-                String feedback = getLanguageString("setmessage.feedback", null, p, "%value%", msg);
-                Util.sendMessage(p,feedback);
+                String feedback = translate("setmessage.feedback", null, p, "%value%", msg);
+                Util.sendMessage(p, feedback);
                 return;
             }
         }

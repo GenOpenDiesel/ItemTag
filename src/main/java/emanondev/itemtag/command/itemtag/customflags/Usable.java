@@ -33,12 +33,12 @@ public class Usable extends CustomFlag {
                     event.setUseItemInHand(Result.DENY);
                     Block b;
                     if (event.getItem().getType() == Material.BUCKET &&
-                            VersionUtils.isVersionAfter(1, 15)) {
+                            VersionUtils.isAfter(1, 15)) {
                         b = event.getPlayer().getTargetBlockExact(7, FluidCollisionMode.SOURCE_ONLY);
                     } else
                         b = null;
                     Bukkit.getScheduler().runTaskLater(ItemTag.get(), () -> { //TODO folia fix
-                        if (!VersionUtils.isVersionAfter(1, 20)) {
+                        if (!VersionUtils.isAfter(1, 20)) {
                             InventoryUtils.updateView(event.getPlayer());
                         }
                         if (b != null) {//reduce clientside visual glich on liquids only for 1.14+
@@ -52,11 +52,11 @@ public class Usable extends CustomFlag {
 
     @EventHandler
     private void event(PlayerBucketFillEvent event) { //obsolete and unrequired on 1.18
-        if (VersionUtils.isVersionAfter(1, 18)) {
+        if (VersionUtils.isAfter(1, 18)) {
             return;
         }
         ItemStack item = this.getItemInHand(event.getPlayer());
-        if (VersionUtils.isVersionUpTo(1, 8, 9) && (item == null || item.getType() != Material.BUCKET)) {
+        if (VersionUtils.isUpTo(1, 8, 9) && (item == null || item.getType() != Material.BUCKET)) {
             item = event.getPlayer().getInventory().getItemInOffHand();
         }
         if (ItemTag.getTagItem(item).hasBooleanTag(USABLE_KEY)) {
@@ -67,11 +67,11 @@ public class Usable extends CustomFlag {
 
     @EventHandler
     private void event(PlayerBucketEmptyEvent event) { //obsolete and unrequired on 1.18
-        if (VersionUtils.isVersionAfter(1, 18)) {
+        if (VersionUtils.isAfter(1, 18)) {
             return;
         }
         ItemStack item = this.getItemInHand(event.getPlayer());
-        if (VersionUtils.isVersionAfter(1, 9) && (item == null ||
+        if (VersionUtils.isAfter(1, 9) && (item == null ||
                 (item.getType() != Material.LAVA_BUCKET && item.getType() != Material.WATER_BUCKET))) {
             item = event.getPlayer().getInventory().getItemInOffHand();
         }

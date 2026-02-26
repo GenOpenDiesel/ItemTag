@@ -2,11 +2,11 @@ package emanondev.itemtag.command.itemtag;
 
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.InventoryUtils;
 import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.VersionUtils;
 import emanondev.itemtag.EffectsInfo;
 import emanondev.itemtag.ItemTag;
-import emanondev.itemtag.ItemTagUtility;
 import emanondev.itemtag.command.ItemTagCommand;
 import emanondev.itemtag.command.ListenerSubCmd;
 import emanondev.itemtag.equipmentchange.EquipmentChangeEvent;
@@ -33,7 +33,7 @@ public class Effects extends ListenerSubCmd {
     public Effects(ItemTagCommand cmd) {
         super("effects", cmd, true, true);
         this.load();
-        if (VersionUtils.isVersionAfter(1, 11))
+        if (VersionUtils.isAfter(1, 11))
             getPlugin().registerListener(new EffectsResurrectListener(this));
     }
 
@@ -147,7 +147,7 @@ public class Effects extends ListenerSubCmd {
                 slots.add(Aliases.EQUIPMENT_SLOTS.convertAlias(args[i]));
 
             EffectsInfo info = new EffectsInfo(getItemInHand(p));
-            for (EquipmentSlot slot : ItemTagUtility.getPlayerEquipmentSlots())
+            for (EquipmentSlot slot : InventoryUtils.getPlayerEquipmentSlots())
                 if (slots.contains(slot) != info.isValidSlot(slot))
                     info.toggleSlot(slot);
             info.update();
@@ -240,7 +240,7 @@ public class Effects extends ListenerSubCmd {
         if (oldEffects.isEmpty() && newEffects.isEmpty())
             return;
         Map<PotionEffectType, PotionEffect> equipsEffects = new HashMap<>();
-        for (EquipmentSlot slot : ItemTagUtility.getPlayerEquipmentSlots()) {
+        for (EquipmentSlot slot : InventoryUtils.getPlayerEquipmentSlots()) {
             //for each slot (except event slot) look on effects
             if (slot == event.getSlotType())
                 continue;
@@ -271,7 +271,7 @@ public class Effects extends ListenerSubCmd {
     private void onPlayerRespawn(PlayerRespawnEvent event) {
         new BukkitRunnable() {
             public void run() {
-                for (EquipmentSlot slot : ItemTagUtility.getPlayerEquipmentSlots()) {
+                for (EquipmentSlot slot : InventoryUtils.getPlayerEquipmentSlots()) {
                     ItemStack equip = getEquip(event.getPlayer(), slot);
                     if (ItemUtils.isAirOrNull(equip))
                         continue;
@@ -286,7 +286,7 @@ public class Effects extends ListenerSubCmd {
 
                         else {
                             PotionEffect currentEffect = null;
-                            if (VersionUtils.isVersionAfter(1, 11))// safe
+                            if (VersionUtils.isAfter(1, 11))// safe
                                 currentEffect = event.getPlayer().getPotionEffect(effect.getType());
                             else
                                 for (PotionEffect k : event.getPlayer().getActivePotionEffects())
@@ -295,7 +295,7 @@ public class Effects extends ListenerSubCmd {
                                         break;
                                     }
                             if (currentEffect.getDuration() < 3600 * 20 && currentEffect.getDuration() >= 0) //could be changed checking the whole equipment effects, but this way seems faster and still fair
-                                if (VersionUtils.isVersionAfter(1, 16))
+                                if (VersionUtils.isAfter(1, 16))
                                     addEffect(event.getPlayer(), effect.getType(), effect);
                                 else if (currentEffect.getAmplifier() <= effect.getAmplifier())
                                     addEffect(event.getPlayer(), effect.getType(), effect);
@@ -317,7 +317,7 @@ public class Effects extends ListenerSubCmd {
             target.addPotionEffect(effect);
             return;
         }
-        if (VersionUtils.isVersionAfter(1, 16)) {
+        if (VersionUtils.isAfter(1, 16)) {
             if (target.hasPotionEffect(effect.getType()))
                 target.removePotionEffect(effect.getType());
             target.addPotionEffect(effect);
@@ -335,7 +335,7 @@ public class Effects extends ListenerSubCmd {
         if (!p.isOnline() || p.isDead())
             return;
         HashMap<PotionEffectType, PotionEffect> newEffects = new HashMap<>();
-        for (EquipmentSlot slot : ItemTagUtility.getPlayerEquipmentSlots()) {
+        for (EquipmentSlot slot : InventoryUtils.getPlayerEquipmentSlots()) {
             Map<PotionEffectType, PotionEffect> newInfo = getPotionEffects(getEquip(p, slot), slot, true);
             newInfo.forEach((k, v) -> {
                 if (getAmplifier(newEffects, k) < v.getAmplifier())
@@ -358,7 +358,7 @@ public class Effects extends ListenerSubCmd {
             case LEGS:
                 return p.getEquipment().getLeggings();
         }// safe
-        if (VersionUtils.isVersionAfter(1, 9) && slot == EquipmentSlot.OFF_HAND)
+        if (VersionUtils.isAfter(1, 9) && slot == EquipmentSlot.OFF_HAND)
             return p.getInventory().getItemInOffHand();
         return null;
     }

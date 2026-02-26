@@ -2,11 +2,11 @@ package emanondev.itemtag.gui;
 
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.gui.PagedGui;
+import emanondev.itemedit.utility.InventoryUtils;
 import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.VersionUtils;
 import emanondev.itemtag.EffectsInfo;
 import emanondev.itemtag.ItemTag;
-import emanondev.itemtag.ItemTagUtility;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -48,7 +48,7 @@ public class EffectsGui implements PagedGui {
                 if (info.hasEffect(type)) {
                     PotionEffect effect = info.getEffect(type);
 
-                    if (VersionUtils.isVersionAfter(1, 13))
+                    if (VersionUtils.isAfter(1, 13))
                         effects.add(new EffectData(type, effect.getAmplifier(), effect.isAmbient(),
                                 effect.hasParticles(), effect.hasIcon()));
                     else
@@ -57,7 +57,7 @@ public class EffectsGui implements PagedGui {
                 } else {
                     effects.add(new EffectData(type, -1, true, true, true));
                 }
-        for (EquipmentSlot slot : ItemTagUtility.getPlayerEquipmentSlots()) {
+        for (EquipmentSlot slot : InventoryUtils.getPlayerEquipmentSlots()) {
             equips.add(new EquipData(slot/*, info.isValidSlot(slot)*/));
         }
         effects.sort((e1, e2) -> Aliases.POTION_EFFECT.getName(e1.type).compareToIgnoreCase(Aliases.POTION_EFFECT.getName(e2.type)));
@@ -242,13 +242,13 @@ public class EffectsGui implements PagedGui {
 
         public ItemStack getItem() {
             PotionMeta meta = (PotionMeta) ItemUtils.getMeta(item);
-            if (VersionUtils.isVersionAfter(1, 11))
+            if (VersionUtils.isAfter(1, 11))
                 meta.setColor(type.getColor());
             meta.addItemFlags(ItemFlag.values());
             loadLanguageDescription(meta, "gui.effects.potion", "%effect%", Aliases.POTION_EFFECT.getName(type)
                             .replace("_", " "), "%level%", String.valueOf(amplifier + 1), "%particles%", Aliases.BOOLEAN.getName(particles),
                     "%ambient%", Aliases.BOOLEAN.getName(ambient), "%icon%",
-                    VersionUtils.isVersionAfter(1, 13) ? Aliases.BOOLEAN.getName(icon) : getLanguageMessage("gui.effects.icon-unsupported"), "%duration%",
+                    VersionUtils.isAfter(1, 13) ? Aliases.BOOLEAN.getName(icon) : getLanguageMessage("gui.effects.icon-unsupported"), "%duration%",
                     getLanguageMessage(type.isInstant() ? "gui.effects.potion-instant" : "gui.effects.potion-unlimited"),
                     "%middle_click%", getLanguageMessage("gui.middleclick." + (getTargetPlayer().getGameMode() == GameMode.CREATIVE ? "creative" : "other")));
             item.setAmount(Math.max(1, amplifier + 1));
@@ -272,7 +272,7 @@ public class EffectsGui implements PagedGui {
                         return;
                 case CREATIVE:
                 case MIDDLE: //middle click or 1, note middle click doesn't work unless in creative mode
-                    if (VersionUtils.isVersionAfter(1, 13))
+                    if (VersionUtils.isAfter(1, 13))
                         icon = !icon;
                     else
                         return;

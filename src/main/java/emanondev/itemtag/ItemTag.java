@@ -33,7 +33,6 @@ import java.util.Locale;
 public class ItemTag extends APlugin {
 
     private static ItemTag plugin = null;
-    private static TagManager tagManager = null;
     private static boolean USE_NBTAPI;
     @Getter
     private EquipmentChangeListenerBase equipChangeListener;
@@ -48,13 +47,13 @@ public class ItemTag extends APlugin {
         return USE_NBTAPI ? new NBTAPITagItem(item) : new SpigotTagItem(item);
     }
 
-    @Deprecated
-    public TagManager getTagManager() {
-        return tagManager;
-    }
-
     public void onLoad() {
         plugin = this;
+    }
+
+    @Override
+    public void load() {
+
     }
 
     @Override
@@ -71,9 +70,9 @@ public class ItemTag extends APlugin {
 
         try {
             //register equipmentchange listener
-            if (VersionUtils.isVersionUpTo(1, 8, 9)) {
+            if (VersionUtils.isUpTo(1, 8, 9)) {
                 equipChangeListener = new EquipmentChangeListenerUpTo1_8();
-            } else if (VersionUtils.isVersionUpTo(1, 12, 2)) {
+            } else if (VersionUtils.isUpTo(1, 12, 2)) {
                 equipChangeListener = new EquipmentChangeListenerUpTo1_13();
             } else {
                 equipChangeListener = new EquipmentChangeListener();
@@ -198,18 +197,16 @@ public class ItemTag extends APlugin {
     private void initNBTAPI() throws Exception {
         new NBTAPITagItem(new ItemStack(Material.STONE));//force load NBTAPI classes or fails
         USE_NBTAPI = true;
-        tagManager = new NBTAPITagManager();
         this.log("Data using NBTAPI");
     }
 
     private void initSpigotPersistentDataAPI() throws Exception {
         USE_NBTAPI = false;
-        tagManager = new SpigotTagManager();
         this.log("Data using Spigot PersistentDataContainer");
     }
 
     private void initDefault() throws Exception {
-        if (!VersionUtils.isVersionAfter(1, 14)) {
+        if (!VersionUtils.isAfter(1, 14)) {
             try {
                 initNBTAPI();
             } catch (Exception e) {

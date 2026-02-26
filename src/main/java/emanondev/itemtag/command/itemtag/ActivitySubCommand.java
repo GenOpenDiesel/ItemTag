@@ -103,8 +103,8 @@ public class ActivitySubCommand extends SubCmd {
 
     private void create(Player player, String label, String[] args) {
         if (args.length != 3) {
-            Util.sendMessage(player, this.craftFailFeedback(label, getLanguageString("create.params", null, player),
-                    getLanguageStringList("create.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("create.params", null, player),
+                    translateList("create.description", null, player)));
             return;
         }
         Activity activity = ActivityManager.getActivity(args[2]);
@@ -121,8 +121,8 @@ public class ActivitySubCommand extends SubCmd {
     //activity rename <id> <newId>
     private void rename(Player player, String label, String[] args) {
         if (args.length != 4) {
-            Util.sendMessage(player, this.craftFailFeedback(label, getLanguageString("rename.params", null, player),
-                    getLanguageStringList("rename.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("rename.params", null, player),
+                    translateList("rename.description", null, player)));
             return;
         }
         Activity activity = ActivityManager.getActivity(args[2]);
@@ -142,8 +142,8 @@ public class ActivitySubCommand extends SubCmd {
     //open <action id>
     private void open(Player player, String label, String[] args) {
         if (args.length != 3) {
-            Util.sendMessage(player, this.craftFailFeedback(label, getLanguageString("open.params", null, player),
-                    getLanguageStringList("open.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("open.params", null, player),
+                    translateList("open.description", null, player)));
             return;
         }
         Activity activity = ActivityManager.getActivity(args[2]);
@@ -156,8 +156,8 @@ public class ActivitySubCommand extends SubCmd {
 
     private void delete(Player player, String label, String[] args) {
         if (args.length != 3) {
-            Util.sendMessage(player, this.craftFailFeedback(label, getLanguageString("delete.params", null, player),
-                    getLanguageStringList("delete.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("delete.params", null, player),
+                    translateList("delete.description", null, player)));
             return;
         }
         Activity activity = ActivityManager.getActivity(args[2]);
@@ -171,8 +171,8 @@ public class ActivitySubCommand extends SubCmd {
 
     private void clone(Player player, String label, String[] args) {
         if (args.length != 4) {
-            Util.sendMessage(player, this.craftFailFeedback(label, getLanguageString("clone.params", null, player),
-                    getLanguageStringList("clone.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("clone.params", null, player),
+                    translateList("clone.description", null, player)));
             return;
         }
         Activity activity = ActivityManager.getActivity(args[2]);
@@ -193,8 +193,8 @@ public class ActivitySubCommand extends SubCmd {
     //setconsumes <activity> <amount>
     private void setconsumes(Player player, String label, String[] args) {
         if (args.length != 4) {
-            Util.sendMessage(player, this.craftFailFeedback(label, getLanguageString("setconsumes.params", null, player),
-                    getLanguageStringList("setconsumes.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("setconsumes.params", null, player),
+                    translateList("setconsumes.description", null, player)));
             return;
         }
         Activity activity = ActivityManager.getActivity(args[2]);
@@ -206,8 +206,8 @@ public class ActivitySubCommand extends SubCmd {
         try {
             amount = Integer.parseInt(args[3]);
         } catch (Exception e) {
-            Util.sendMessage(player, this.craftFailFeedback(label, getLanguageString("setconsumes.params", null, player),
-                    getLanguageStringList("setconsumes.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("setconsumes.params", null, player),
+                    translateList("setconsumes.description", null, player)));
             //TODO NaN
             return;
         }
@@ -222,8 +222,8 @@ public class ActivitySubCommand extends SubCmd {
     //addcondition <activity> <conditiontype> <condition arguments>
     private void addcondition(Player player, String label, String[] args) {
         if (args.length < 4) {
-            Util.sendMessage(player, this.craftFailFeedback(label, getLanguageString("addcondition.params", null, player),
-                    getLanguageStringList("addcondition.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("addcondition.params", null, player),
+                    translateList("addcondition.description", null, player)));
             return;
         }
         Activity activity = ActivityManager.getActivity(args[2]);
@@ -233,8 +233,8 @@ public class ActivitySubCommand extends SubCmd {
         }
         ConditionType type = ConditionManager.getConditionType(args[3]);
         if (type == null) {
-            Util.sendMessage(player, this.craftFailFeedback(label, getLanguageString("addcondition.params", null, player),
-                    getLanguageStringList("addcondition.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("addcondition.params", null, player),
+                    translateList("addcondition.description", null, player)));
             //TODO
             return;
         }
@@ -245,14 +245,14 @@ public class ActivitySubCommand extends SubCmd {
         try {
             condition = ConditionManager.read(b.toString());
         } catch (Exception e) {
-            Util.sendMessage(player, this.craftFailFeedback(label, getLanguageString("addcondition.params", null, player),
-                    getLanguageStringList("addcondition.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("addcondition.params", null, player),
+                    translateList("addcondition.description", null, player)));
             //TODO bad format
             return;
         }
         if (condition == null) {
-            Util.sendMessage(player, this.craftFailFeedback(label, getLanguageString("addcondition.params", null, player),
-                    getLanguageStringList("addcondition.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("addcondition.params", null, player),
+                    translateList("addcondition.description", null, player)));
             //TODO invalid condition type
             return;
         }

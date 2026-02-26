@@ -1,6 +1,5 @@
 package emanondev.itemtag.command.itemtag;
 
-import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.aliases.Aliases;
@@ -156,8 +155,8 @@ public class Actions extends ListenerSubCmd {
                 sendLanguageString("permission.feedback.removed", "", p);
             }
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, getLanguageString("permission.params", null, p),
-                    getLanguageStringList("permission.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("permission.params", null, p),
+                    translateList("permission.description", null, p)));
         }
     }
 
@@ -175,8 +174,8 @@ public class Actions extends ListenerSubCmd {
                 sendLanguageString("cooldownid.feedback.removed", "", p);
             }
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, getLanguageString("cooldownid.params", null, p),
-                    getLanguageStringList("cooldownid.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("cooldownid.params", null, p),
+                    translateList("cooldownid.description", null, p)));
         }
     }
 
@@ -192,8 +191,8 @@ public class Actions extends ListenerSubCmd {
                 sendLanguageString("cooldownmsg.feedback.removed", "", p);
             }
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, getLanguageString("cooldownmsg.params", null, p),
-                    getLanguageStringList("cooldownmsg.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("cooldownmsg.params", null, p),
+                    translateList("cooldownmsg.description", null, p)));
         }
     }
 
@@ -214,8 +213,8 @@ public class Actions extends ListenerSubCmd {
             ActionsUtility.setCooldownMsgType(tagItem, type);
             sendLanguageString("cooldownmsgtype.feedback.set", "", p, "%type%", type);
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, getLanguageString("cooldownmsgtype.params", null, p),
-                    getLanguageStringList("cooldownmsgtype.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("cooldownmsgtype.params", null, p),
+                    translateList("cooldownmsgtype.description", null, p)));
         }
     }
 
@@ -234,8 +233,8 @@ public class Actions extends ListenerSubCmd {
                 sendLanguageString("cooldown.feedback.removed", "", p);
             }
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, getLanguageString("cooldown.params", null, p),
-                    getLanguageStringList("cooldown.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("cooldown.params", null, p),
+                    translateList("cooldown.description", null, p)));
         }
     }
 
@@ -260,8 +259,8 @@ public class Actions extends ListenerSubCmd {
                 sendLanguageString("maxuses.feedback.set", "", p, "%uses%", String.valueOf(uses));
             }
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, getLanguageString("maxuses.params", null, p),
-                    getLanguageStringList("maxuses.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("maxuses.params", null, p),
+                    translateList("maxuses.description", null, p)));
         }
     }
 
@@ -286,19 +285,19 @@ public class Actions extends ListenerSubCmd {
                         "%uses%", String.valueOf(uses));
             }
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, getLanguageString("uses.params", null, p),
-                    getLanguageStringList("uses.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("uses.params", null, p),
+                    translateList("uses.description", null, p)));
         }
     }
 
     private void invalidAction(Player p, String actionError) {
-        String msg = getLanguageString("invalid-action.message", "", p, "%error%", actionError);
+        String msg = translate("invalid-action.message", "", p, "%error%", actionError);
         if (msg == null || msg.isEmpty()) {
             return;
         }
-        StringBuilder hover = new StringBuilder(getLanguageString("invalid-action.hover-pre", "", p)).append("\n");
-        String color1 = getLanguageString("invalid-action.first_color", "", p);
-        String color2 = getLanguageString("invalid-action.second_color", "", p);
+        StringBuilder hover = new StringBuilder(translate("invalid-action.hover-pre", "", p)).append("\n");
+        String color1 = translate("invalid-action.first_color", "", p);
+        String color2 = translate("invalid-action.second_color", "", p);
         boolean color = true;
         int counter = 0;
         for (String actionType : ActionHandler.getTypes()) {
@@ -316,7 +315,7 @@ public class Actions extends ListenerSubCmd {
     }
 
     private void invalidActionInfo(Player p, String actionType, String actionInfo) {
-        String msg = getLanguageString("invalid-actioninfo.message", "", p, "%error%", actionInfo, "%action%", actionType);
+        String msg = translate("invalid-actioninfo.message", "", p, "%error%", actionInfo, "%action%", actionType);
         if (msg == null || msg.isEmpty()) {
             return;
         }
@@ -362,8 +361,8 @@ public class Actions extends ListenerSubCmd {
             sendLanguageString("set.feedback", "", p, "%line%",
                     String.valueOf(line + 1), "%action%", originalAction);
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, getLanguageString("set.params", null, p),
-                    getLanguageStringList("set.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("set.params", null, p),
+                    translateList("set.description", null, p)));
         }
     }
 
@@ -388,8 +387,8 @@ public class Actions extends ListenerSubCmd {
             sendLanguageString("remove.feedback", "", p, "%line%",
                     String.valueOf(line + 1), "%action%", action.split(ActionsUtility.TYPE_SEPARATOR)[0]);
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, getLanguageString("remove.params", null, p),
-                    getLanguageStringList("remove.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("remove.params", null, p),
+                    translateList("remove.description", null, p)));
         }
     }
 
@@ -428,8 +427,8 @@ public class Actions extends ListenerSubCmd {
                     originalAction);
         } catch (Exception e) {
             e.printStackTrace();
-            Util.sendMessage(p, this.craftFailFeedback(label, getLanguageString("add.params", null, p),
-                    getLanguageStringList("add.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("add.params", null, p),
+                    translateList("add.description", null, p)));
         }
     }
 
@@ -465,8 +464,8 @@ public class Actions extends ListenerSubCmd {
             sendLanguageString("addline.feedback", "", p, "%action%",
                     originalAction, "%line%", String.valueOf(line + 1));
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, getLanguageString("addline.params", null, p),
-                    getLanguageStringList("addline.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("addline.params", null, p),
+                    translateList("addline.description", null, p)));
         }
     }
 
@@ -486,9 +485,9 @@ public class Actions extends ListenerSubCmd {
                     case "consume":
                     case "displayuses":
                         return CompleteUtility.complete(args[2], Aliases.BOOLEAN);
-                    case "cooldownmsgtype":{
-                        return CompleteUtility.complete(args[2], VersionUtils.isVersionAfter(1,11 )?
-                                Arrays.asList("chat","actionbar"): Collections.singletonList("chat"));
+                    case "cooldownmsgtype": {
+                        return CompleteUtility.complete(args[2], VersionUtils.isAfter(1, 11) ?
+                                Arrays.asList("chat", "actionbar") : Collections.singletonList("chat"));
                     }
                 }
                 return Collections.emptyList();
@@ -534,24 +533,24 @@ public class Actions extends ListenerSubCmd {
                     String cooldownId = ActionsUtility.getCooldownId(tagItem);
                     if (ItemTag.get().getCooldownAPI().hasCooldown(event.getPlayer(), cooldownId)) {
                         String msg = ActionsUtility.getCooldownMsg(tagItem);
-                        if (msg==null){
+                        if (msg == null) {
                             return;
                         }
                         String type = ActionsUtility.getCooldownMsgType(tagItem);
-                        msg = UtilsString.fix(msg,event.getPlayer(),true);
-                        switch (type){
+                        msg = UtilsString.fix(msg, event.getPlayer(), true);
+                        switch (type) {
                             case "chat":
-                                Util.sendMessage(event.getPlayer(),msg);
+                                Util.sendMessage(event.getPlayer(), msg);
                                 break;
                             case "actionbar":
-                                if (VersionUtils.isVersionAfter(1,11,2)){
-                                    event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR,new TextComponent(msg));
+                                if (VersionUtils.isAfter(1, 11, 2)) {
+                                    event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(msg));
                                     break;
                                 }
-                                ItemTag.get().log("Invalid action cooldown message type &e"+type+"&f not available on this server version");
+                                ItemTag.get().log("Invalid action cooldown message type &e" + type + "&f not available on this server version");
                                 break;
                             default:
-                                ItemTag.get().log("Invalid action cooldown message type &e"+type);
+                                ItemTag.get().log("Invalid action cooldown message type &e" + type);
                         }
 
                         return;

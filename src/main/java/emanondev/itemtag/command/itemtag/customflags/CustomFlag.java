@@ -30,7 +30,7 @@ public abstract class CustomFlag implements Listener, Comparable<CustomFlag> {
         this.key = key;
         this.subCommand = subCommand;
         config = this.getPlugin().getConfig("commands.yml");
-        PATH = subCommand.getCommand().getName() + "." + subCommand.ID + "." + this.ID + ".";
+        PATH = subCommand.getCommand().getName() + "." + subCommand.getId() + "." + this.ID + ".";
     }
 
     @Override

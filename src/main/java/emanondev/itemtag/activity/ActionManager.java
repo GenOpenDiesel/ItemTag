@@ -33,10 +33,10 @@ public class ActionManager {
         register(new CommandAsOpActionType());
         register(new ServerCommandActionType());
         register(new MessageActionType());
-        if (VersionUtils.isVersionAfter(1, 11)) {
+        if (VersionUtils.isAfter(1, 11)) {
             register(new TitleActionType());
         }
-        if (VersionUtils.isVersionAfter(1, 9, 2)) {
+        if (VersionUtils.isAfter(1, 9, 2)) {
             register(new ActionBarActionType());
         }
         register(new DelayedActionType());

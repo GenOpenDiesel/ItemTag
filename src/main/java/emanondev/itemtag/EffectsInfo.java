@@ -1,5 +1,6 @@
 package emanondev.itemtag;
 
+import emanondev.itemedit.utility.InventoryUtils;
 import emanondev.itemedit.utility.VersionUtils;
 import lombok.Getter;
 import org.bukkit.inventory.EquipmentSlot;
@@ -29,7 +30,7 @@ public class EffectsInfo {
         if (tagItem.hasStringTag(EFFECTS_EQUIPS_KEY))
             slots.addAll(stringToEquips(tagItem.getString(EFFECTS_EQUIPS_KEY)));
         if (slots.isEmpty())
-            slots.addAll(ItemTagUtility.getPlayerEquipmentSlots());
+            slots.addAll(InventoryUtils.getPlayerEquipmentSlots());
     }
 
     /**
@@ -38,9 +39,9 @@ public class EffectsInfo {
     public static PotionEffect craftPotionEffect(PotionEffectType type, int amplifier, boolean ambient,
                                                  boolean particles,
                                                  boolean icon) {
-        int duration = type.isInstant() ? 1 : (VersionUtils.isVersionUpTo(1, 19, 3) ?
+        int duration = type.isInstant() ? 1 : (VersionUtils.isUpTo(1, 19, 3) ?
                 (20 * 3600 * 12) : PotionEffect.INFINITE_DURATION);
-        if (VersionUtils.isVersionAfter(1, 13)) {
+        if (VersionUtils.isAfter(1, 13)) {
             return new PotionEffect(type, duration, amplifier, ambient, particles, icon);
         }
         return new PotionEffect(type, duration, amplifier, ambient, particles);
@@ -53,14 +54,14 @@ public class EffectsInfo {
         StringBuilder str = new StringBuilder().append(list.get(0).getType().getName())//TODO should use list.get(0).getType().getKey() for 1.20.6+
                 .append(",").append(list.get(0).getAmplifier())
                 .append(",").append(list.get(0).isAmbient()).append(",").append(list.get(0).hasParticles());
-        if (VersionUtils.isVersionAfter(1, 13))
+        if (VersionUtils.isAfter(1, 13))
             str.append(",").append(list.get(0).hasIcon());
         else
             str.append(",true");
         for (int i = 1; i < list.size(); i++) {
             str.append(";").append(list.get(i).getType().getName()).append(",").append(list.get(i).getAmplifier()).append(",")
                     .append(list.get(i).isAmbient()).append(",").append(list.get(i).hasParticles());
-            if (VersionUtils.isVersionAfter(1, 13))
+            if (VersionUtils.isAfter(1, 13))
                 str.append(",").append(list.get(i).hasIcon());
             else
                 str.append(",true");
@@ -90,7 +91,7 @@ public class EffectsInfo {
     }
 
     private String equipsToString() {
-        if (slots.size() == ItemTagUtility.getPlayerEquipmentSlots().size())
+        if (slots.size() == InventoryUtils.getPlayerEquipmentSlots().size())
             return null;
         List<EquipmentSlot> list = new ArrayList<>(slots);
         StringBuilder str = new StringBuilder();
@@ -146,7 +147,7 @@ public class EffectsInfo {
         if (slots.contains(slot)) {
             slots.remove(slot);
             if (slots.isEmpty())
-                slots.addAll(ItemTagUtility.getPlayerEquipmentSlots());
+                slots.addAll(InventoryUtils.getPlayerEquipmentSlots());
             return;
         }
         slots.add(slot);
@@ -157,7 +158,7 @@ public class EffectsInfo {
             tagItem.removeTag(EFFECTS_LIST_KEY);
         else
             tagItem.setTag(EFFECTS_LIST_KEY, effectsToString());
-        if (slots.size() == ItemTagUtility.getPlayerEquipmentSlots().size())
+        if (slots.size() == InventoryUtils.getPlayerEquipmentSlots().size())
             tagItem.removeTag(EFFECTS_EQUIPS_KEY);
         else
             tagItem.setTag(EFFECTS_EQUIPS_KEY, equipsToString());

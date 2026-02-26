@@ -255,7 +255,7 @@ public class ActionsGui implements Gui {
                 "%value%", ActionsUtility.getUses(tagItem) == -1 ? "-1 (Unlimited)" : String.valueOf(ActionsUtility.getUses(tagItem)), "%editor%", String.valueOf(editorValue)
                 , "%editor-prev%", String.valueOf(Math.max(1, editorValue / 10)), "%editor-next%", String.valueOf(Math.min(1000000, editorValue * 10))));
 
-        if (VersionUtils.isVersionAfter(1, 9)) {
+        if (VersionUtils.isAfter(1, 9)) {
             //max uses
             this.getInventory().setItem(17, this.loadLanguageDescription(this.getGuiItem("gui.actions.maxuses", Material.DIAMOND_PICKAXE), "gui.actions.maxuses",
                     "%value%", ActionsUtility.getMaxUses(tagItem) == -1 ? "-1 (Unlimited)" : String.valueOf(ActionsUtility.getMaxUses(tagItem)), "%editor%", String.valueOf(editorValue)

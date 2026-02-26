@@ -55,17 +55,17 @@ public class Flag extends SubCmd {
         this.registerFlag(new FurnaceFuel(this));
         this.registerFlag(new Enchantable(this));
         this.registerFlag(new EntityFood(this));
-        if (VersionUtils.isVersionAfter(1, 9))
+        if (VersionUtils.isAfter(1, 9))
             this.registerFlag(new Renamable(this));
         else
             this.registerFlag(new RenamableOld(this));
-        if (VersionUtils.isVersionAfter(1, 14))
+        if (VersionUtils.isAfter(1, 14))
             this.registerFlag(new Grindable(this));
         this.registerFlag(new EquipmentFlag(this));
         this.registerFlag(new VanishCurse(this));
         this.registerFlag(new ClickMove(this));
         this.registerFlag(new Tradeable(this));
-        if (VersionUtils.isVersionAfter(1, 16, 5)) {
+        if (VersionUtils.isAfter(1, 16, 5)) {
             this.registerFlag(new SmithingTable(this));
         }
         //aliases.reload();
