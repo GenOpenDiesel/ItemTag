@@ -15,7 +15,6 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ItemTagUpdateOldItem implements TabExecutor {
@@ -33,7 +32,7 @@ public class ItemTagUpdateOldItem implements TabExecutor {
                                       @NotNull Command command,
                                       @NotNull String label,
                                       String[] args) {
-        return Collections.emptyList();
+        return List.of();
     }
 
 

@@ -46,58 +46,56 @@ public class Actions extends ListenerSubCmd {
             //onFail(p, alias);
             return;
         }
-        try {
-            switch (args[1].toLowerCase(Locale.ENGLISH)) {
-                case "add":
-                    add(p, alias, args, item);
-                    return;
-                case "addline":
-                    addLine(p, alias, args, item);
-                    return;
-                case "remove":
-                    remove(p, alias, args, item);
-                    return;
-                case "set":
-                    set(p, alias, args, item);
-                    return;
-                case "uses":
-                    uses(p, alias, args, item);
-                    return;
-                case "maxuses":
-                    maxUses(p, alias, args, item);
-                    return;
-                case "consume":
-                    consume(p, alias, args, item);
-                    return;
-                case "cooldown":
-                    cooldown(p, alias, args, item);
-                    return;
-                case "cooldownmsg":
-                    cooldownMsg(p, alias, args, item);
-                    return;
-                case "cooldownmsgtype":
-                    cooldownMsgType(p, alias, args, item);
-                    return;
-                case "cooldownid":
-                    cooldownId(p, alias, args, item);
-                    return;
-                case "permission":
-                    permission(p, alias, args, item);
-                    return;
-                case "visualcooldown":
-                    visualCooldown(p, alias, args, item);
-                    return;
-                case "displayuses":
-                    displayUses(p, alias, args, item);
-                case "info":
-                    p.openInventory(new ActionsGui(p, item, alias, this.getName()).getInventory());
-                    //info(p, args, item);
-                    return;
-            }
-            onFail(p, alias);
-        } catch (Exception e) {
-            e.printStackTrace();
-            onFail(p, alias);
+        switch (args[1].toLowerCase(Locale.ENGLISH)) {
+            case "add":
+                add(p, alias, args, item);
+                return;
+            case "addline":
+                addLine(p, alias, args, item);
+                return;
+            case "remove":
+                remove(p, alias, args, item);
+                return;
+            case "set":
+                set(p, alias, args, item);
+                return;
+            case "uses":
+                uses(p, alias, args, item);
+                return;
+            case "maxuses":
+                maxUses(p, alias, args, item);
+                return;
+            case "consume":
+                consume(p, alias, args, item);
+                return;
+            case "cooldown":
+                cooldown(p, alias, args, item);
+                return;
+            case "cooldownmsg":
+                cooldownMsg(p, alias, args, item);
+                return;
+            case "cooldownmsgtype":
+                cooldownMsgType(p, alias, args, item);
+                return;
+            case "cooldownid":
+                cooldownId(p, alias, args, item);
+                return;
+            case "permission":
+                permission(p, alias, args, item);
+                return;
+            case "visualcooldown":
+                visualCooldown(p, alias, args, item);
+                return;
+            case "displayuses":
+                displayUses(p, alias, args, item);
+                return;
+            case "info":
+                p.openInventory(new ActionsGui(p, item, alias, this.getName()).getInventory());
+                //info(p, args, item);
+                return;
+            default:
+                onFail(p, alias);
+
         }
     }
 
@@ -108,10 +106,10 @@ public class Actions extends ListenerSubCmd {
         ActionsUtility.setDisplayUses(tagItem, value);
         ActionsUtility.updateUsesDisplay(item);
         if (value) {
-            sendLanguageString("displayuses.feedback.set", "", p);
+            sendLanguageString("displayuses.feedback.set", p);
             ActionsUtility.updateUsesDisplay(item);
         } else {
-            sendLanguageString("displayuses.feedback.unset", "", p);
+            sendLanguageString("displayuses.feedback.unset", p);
             ActionsUtility.updateUsesDisplay(item);
         }
     }
@@ -122,9 +120,9 @@ public class Actions extends ListenerSubCmd {
         boolean value = args.length >= 3 ? Aliases.BOOLEAN.convertAlias(args[2]) : !ActionsUtility.getVisualCooldown(tagItem);
         ActionsUtility.setVisualCooldown(tagItem, value);
         if (value) {
-            sendLanguageString("visualcooldown.feedback.set", "", sender);
+            sendLanguageString("visualcooldown.feedback.set", sender);
         } else {
-            sendLanguageString("visualcooldown.feedback.unset", "", sender);
+            sendLanguageString("visualcooldown.feedback.unset", sender);
         }
     }
 
@@ -134,9 +132,9 @@ public class Actions extends ListenerSubCmd {
         boolean value = args.length >= 3 ? Aliases.BOOLEAN.convertAlias(args[2]) : !ActionsUtility.getConsume(tagItem);
         ActionsUtility.setConsume(tagItem, value);
         if (value) {
-            sendLanguageString("consume.feedback.set", "", sender);
+            sendLanguageString("consume.feedback.set", sender);
         } else {
-            sendLanguageString("consume.feedback.unset", "", sender);
+            sendLanguageString("consume.feedback.unset", sender);
         }
     }
 
@@ -150,13 +148,13 @@ public class Actions extends ListenerSubCmd {
             TagItem tagItem = ItemTag.getTagItem(item);
             ActionsUtility.setPermission(tagItem, permission);
             if (permission != null) {
-                sendLanguageString("permission.feedback.set", "", p, "%permission%", permission);
+                sendLanguageString("permission.feedback.set", p, "%permission%", permission);
             } else {
-                sendLanguageString("permission.feedback.removed", "", p);
+                sendLanguageString("permission.feedback.removed", p);
             }
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, translate("permission.params", null, p),
-                    translateList("permission.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("permission.params", p),
+                    translateList("permission.description", p)));
         }
     }
 
@@ -169,13 +167,13 @@ public class Actions extends ListenerSubCmd {
             TagItem tagItem = ItemTag.getTagItem(item);
             ActionsUtility.setCooldownId(tagItem, cooldownId);
             if (cooldownId != null) {
-                sendLanguageString("cooldownid.feedback.set", "", p, "%id%", cooldownId);
+                sendLanguageString("cooldownid.feedback.set", p, "%id%", cooldownId);
             } else {
-                sendLanguageString("cooldownid.feedback.removed", "", p);
+                sendLanguageString("cooldownid.feedback.removed", p);
             }
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, translate("cooldownid.params", null, p),
-                    translateList("cooldownid.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("cooldownid.params", p),
+                    translateList("cooldownid.description", p)));
         }
     }
 
@@ -186,13 +184,13 @@ public class Actions extends ListenerSubCmd {
             TagItem tagItem = ItemTag.getTagItem(item);
             ActionsUtility.setCooldownMsg(tagItem, cooldownMsg);
             if (cooldownMsg != null) {
-                sendLanguageString("cooldownmsg.feedback.set", "", p, "%msg%", cooldownMsg);
+                sendLanguageString("cooldownmsg.feedback.set", p, "%msg%", cooldownMsg);
             } else {
-                sendLanguageString("cooldownmsg.feedback.removed", "", p);
+                sendLanguageString("cooldownmsg.feedback.removed", p);
             }
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, translate("cooldownmsg.params", null, p),
-                    translateList("cooldownmsg.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("cooldownmsg.params", p),
+                    translateList("cooldownmsg.description", p)));
         }
     }
 
@@ -211,10 +209,10 @@ public class Actions extends ListenerSubCmd {
             }
             TagItem tagItem = ItemTag.getTagItem(item);
             ActionsUtility.setCooldownMsgType(tagItem, type);
-            sendLanguageString("cooldownmsgtype.feedback.set", "", p, "%type%", type);
+            sendLanguageString("cooldownmsgtype.feedback.set", p, "%type%", type);
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, translate("cooldownmsgtype.params", null, p),
-                    translateList("cooldownmsgtype.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("cooldownmsgtype.params", p),
+                    translateList("cooldownmsgtype.description", p)));
         }
     }
 
@@ -227,14 +225,14 @@ public class Actions extends ListenerSubCmd {
             TagItem tagItem = ItemTag.getTagItem(item);
             ActionsUtility.setCooldownMs(tagItem, cooldownMs);
             if (cooldownMs > 0) {
-                sendLanguageString("cooldown.feedback.set", "", p, "%cooldown_ms%",
+                sendLanguageString("cooldown.feedback.set", p, "%cooldown_ms%",
                         String.valueOf(cooldownMs), "%cooldown_seconds%", String.valueOf(cooldownMs / 1000));
             } else {
-                sendLanguageString("cooldown.feedback.removed", "", p);
+                sendLanguageString("cooldown.feedback.removed", p);
             }
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, translate("cooldown.params", null, p),
-                    translateList("cooldown.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("cooldown.params", p),
+                    translateList("cooldown.description", p)));
         }
     }
 
@@ -254,13 +252,13 @@ public class Actions extends ListenerSubCmd {
                 ActionsUtility.updateUsesDisplay(item);
             }
             if (uses < 0) {
-                sendLanguageString("maxuses.feedback.unlimited", "", p);
+                sendLanguageString("maxuses.feedback.unlimited", p);
             } else {
-                sendLanguageString("maxuses.feedback.set", "", p, "%uses%", String.valueOf(uses));
+                sendLanguageString("maxuses.feedback.set", p, "%uses%", String.valueOf(uses));
             }
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, translate("maxuses.params", null, p),
-                    translateList("maxuses.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("maxuses.params", p),
+                    translateList("maxuses.description", p)));
         }
     }
 
@@ -279,25 +277,25 @@ public class Actions extends ListenerSubCmd {
                 ActionsUtility.updateUsesDisplay(item);
             }
             if (uses < 0) {
-                sendLanguageString("uses.feedback.unlimited", "", p);
+                sendLanguageString("uses.feedback.unlimited", p);
             } else {
-                sendLanguageString("uses.feedback.set", "", p,
+                sendLanguageString("uses.feedback.set", p,
                         "%uses%", String.valueOf(uses));
             }
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, translate("uses.params", null, p),
-                    translateList("uses.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("uses.params", p),
+                    translateList("uses.description", p)));
         }
     }
 
     private void invalidAction(Player p, String actionError) {
-        String msg = translate("invalid-action.message", "", p, "%error%", actionError);
+        String msg = translate("invalid-action.message", p, "%error%", actionError);
         if (msg == null || msg.isEmpty()) {
             return;
         }
-        StringBuilder hover = new StringBuilder(translate("invalid-action.hover-pre", "", p)).append("\n");
-        String color1 = translate("invalid-action.first_color", "", p);
-        String color2 = translate("invalid-action.second_color", "", p);
+        StringBuilder hover = new StringBuilder(translate("invalid-action.hover-pre", p)).append("\n");
+        String color1 = translate("invalid-action.first_color", p);
+        String color2 = translate("invalid-action.second_color", p);
         boolean color = true;
         int counter = 0;
         for (String actionType : ActionHandler.getTypes()) {
@@ -315,7 +313,7 @@ public class Actions extends ListenerSubCmd {
     }
 
     private void invalidActionInfo(Player p, String actionType, String actionInfo) {
-        String msg = translate("invalid-actioninfo.message", "", p, "%error%", actionInfo, "%action%", actionType);
+        String msg = translate("invalid-actioninfo.message", p, "%error%", actionInfo, "%action%", actionType);
         if (msg == null || msg.isEmpty()) {
             return;
         }
@@ -358,11 +356,11 @@ public class Actions extends ListenerSubCmd {
                 list.set(line, action);
                 ActionsUtility.setActions(tagItem, list);
             }
-            sendLanguageString("set.feedback", "", p, "%line%",
+            sendLanguageString("set.feedback", p, "%line%",
                     String.valueOf(line + 1), "%action%", originalAction);
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, translate("set.params", null, p),
-                    translateList("set.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("set.params", p),
+                    translateList("set.description", p)));
         }
     }
 
@@ -384,11 +382,11 @@ public class Actions extends ListenerSubCmd {
                 action = list.remove(line);
                 ActionsUtility.setActions(tagItem, list);
             }
-            sendLanguageString("remove.feedback", "", p, "%line%",
+            sendLanguageString("remove.feedback", p, "%line%",
                     String.valueOf(line + 1), "%action%", action.split(ActionsUtility.TYPE_SEPARATOR)[0]);
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, translate("remove.params", null, p),
-                    translateList("remove.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("remove.params", p),
+                    translateList("remove.description", p)));
         }
     }
 
@@ -423,12 +421,12 @@ public class Actions extends ListenerSubCmd {
                 list.add(action);
                 ActionsUtility.setActions(tagItem, list);
             }
-            sendLanguageString("add.feedback", "", p, "%action%",
+            sendFeedback(p, "add.feedback", "%action%",
                     originalAction);
         } catch (Exception e) {
             e.printStackTrace();
-            Util.sendMessage(p, this.craftFailFeedback(label, translate("add.params", null, p),
-                    translateList("add.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("add.params", p),
+                    translateList("add.description", p)));
         }
     }
 
@@ -461,11 +459,11 @@ public class Actions extends ListenerSubCmd {
                 list.add(line, action);
                 ActionsUtility.setActions(tagItem, list);
             }
-            sendLanguageString("addline.feedback", "", p, "%action%",
+            sendLanguageString("addline.feedback", p, "%action%",
                     originalAction, "%line%", String.valueOf(line + 1));
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(label, translate("addline.params", null, p),
-                    translateList("addline.description", null, p)));
+            Util.sendMessage(p, this.craftFailFeedback(label, translate("addline.params", p),
+                    translateList("addline.description", p)));
         }
     }
 
@@ -475,31 +473,22 @@ public class Actions extends ListenerSubCmd {
             case 2:
                 return CompleteUtility.complete(args[1], actionsSub);
             case 3:
-                switch (args[1].toLowerCase(Locale.ENGLISH)) {
-                    case "add":
-                        return CompleteUtility.complete(args[2], ActionHandler.getTypes());
-                    case "uses":
-                    case "maxuses":
-                        return CompleteUtility.complete(args[2], Arrays.asList("-1", "1", "5", "10"));
-                    case "visualcooldown":
-                    case "consume":
-                    case "displayuses":
-                        return CompleteUtility.complete(args[2], Aliases.BOOLEAN);
-                    case "cooldownmsgtype": {
-                        return CompleteUtility.complete(args[2], VersionUtils.isAfter(1, 11) ?
-                                Arrays.asList("chat", "actionbar") : Collections.singletonList("chat"));
-                    }
-                }
-                return Collections.emptyList();
+                return switch (args[1].toLowerCase(Locale.ENGLISH)) {
+                    case "add" -> CompleteUtility.complete(args[2], ActionHandler.getTypes());
+                    case "uses", "maxuses" -> CompleteUtility.complete(args[2], Arrays.asList("-1", "1", "5", "10"));
+                    case "visualcooldown", "consume", "displayuses" ->
+                            CompleteUtility.complete(args[2], Aliases.BOOLEAN);
+                    case "cooldownmsgtype" -> CompleteUtility.complete(args[2], VersionUtils.isAfter(1, 11) ?
+                            Arrays.asList("chat", "actionbar") : Collections.singletonList("chat"));
+                    default -> List.of();
+                };
             case 4:
-                switch (args[1].toLowerCase(Locale.ENGLISH)) {
-                    case "add":
-                        return ActionHandler.tabComplete(sender, args[2].toLowerCase(Locale.ENGLISH), new ArrayList<>(Arrays.asList(args).subList(3, args.length)));
-                    case "set":
-                    case "addline":
-                        return CompleteUtility.complete(args[3], ActionHandler.getTypes());
-                }
-                return Collections.emptyList();
+                return switch (args[1].toLowerCase(Locale.ENGLISH)) {
+                    case "add" ->
+                            ActionHandler.tabComplete(sender, args[2].toLowerCase(Locale.ENGLISH), new ArrayList<>(Arrays.asList(args).subList(3, args.length)));
+                    case "set", "addline" -> CompleteUtility.complete(args[3], ActionHandler.getTypes());
+                    default -> List.of();
+                };
             default:
                 switch (args[1].toLowerCase(Locale.ENGLISH)) {
                     case "add":
@@ -509,7 +498,7 @@ public class Actions extends ListenerSubCmd {
                         return ActionHandler.tabComplete(sender, args[3].toLowerCase(Locale.ENGLISH), new ArrayList<>(Arrays.asList(args).subList(4, args.length)));
                 }
         }
-        return Collections.emptyList();
+        return List.of();
     }
 
     @SuppressWarnings("deprecation")

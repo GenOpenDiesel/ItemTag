@@ -13,7 +13,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
@@ -233,7 +232,7 @@ public class TriggerAction extends SubCmd {
                     case "visualcooldown":
                         return CompleteUtility.complete(args[2], Aliases.BOOLEAN);
                     default:
-                        return Collections.emptyList();
+                        return List.of();
                 }
             case 4:
                 switch (args[1].toLowerCase(Locale.ENGLISH)) {
@@ -242,12 +241,12 @@ public class TriggerAction extends SubCmd {
                     case "setallowedslots":
                         return CompleteUtility.complete(args[2], Aliases.EQUIPMENT_SLOTS);
                     default:
-                        return Collections.emptyList();
+                        return List.of();
                 }
             default:
                 if (args[1].equalsIgnoreCase("setallowedslots"))
                     return CompleteUtility.complete(args[2], Aliases.EQUIPMENT_SLOTS);
-                return Collections.emptyList();
+                return List.of();
         }
     }
 }

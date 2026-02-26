@@ -19,7 +19,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -61,7 +60,7 @@ public class UsePermission extends ListenerSubCmd {
         ItemStack item = this.getItemInHand(p);
         TagItem tagItem = ItemTag.getTagItem(item);
         switch (args[1].toLowerCase(Locale.ENGLISH)) {
-            case "setpermission": {
+            case "setpermission" -> {
                 if (args.length > 3) {
                     onFail(p, alias);
                     return;
@@ -70,23 +69,23 @@ public class UsePermission extends ListenerSubCmd {
                 setUseKey(tagItem, permission);
                 String feedback;
                 if (permission != null) {
-                    feedback = translate("setpermission.feedback", null, p, "%value%", permission);
+                    feedback = translate("setpermission.feedback",  p, "%value%", permission);
                 } else {
-                    feedback = translate("setpermission.feedback-reset", null, p);
+                    feedback = translate("setpermission.feedback-reset",  p);
                 }
                 Util.sendMessage(p, feedback);
                 return;
             }
-            case "setmessage": {
+            case "setmessage" -> {
                 if (args.length == 2) {
                     setUseMsgKey(tagItem, null);
-                    String feedback = translate("setmessage.feedback-reset", null, p);
+                    String feedback = translate("setmessage.feedback-reset",  p);
                     Util.sendMessage(p, feedback);
                     return;
                 }
                 String msg = UtilsString.fix(String.join(" ", Arrays.asList(args).subList(2, args.length)), null, true);
                 setUseMsgKey(tagItem, msg);
-                String feedback = translate("setmessage.feedback", null, p, "%value%", msg);
+                String feedback = translate("setmessage.feedback",  p, "%value%", msg);
                 Util.sendMessage(p, feedback);
                 return;
             }
@@ -99,7 +98,7 @@ public class UsePermission extends ListenerSubCmd {
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (args.length == 2)
             return CompleteUtility.complete(args[1], "setpermission", "setmessage");
-        return Collections.emptyList();
+        return List.of();
     }
 
     @EventHandler

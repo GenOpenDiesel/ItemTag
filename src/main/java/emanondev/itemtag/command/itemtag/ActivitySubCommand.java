@@ -10,7 +10,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -103,52 +102,52 @@ public class ActivitySubCommand extends SubCmd {
 
     private void create(Player player, String label, String[] args) {
         if (args.length != 3) {
-            Util.sendMessage(player, this.craftFailFeedback(label, translate("create.params", null, player),
-                    translateList("create.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("create.params",  player),
+                    translateList("create.description",  player)));
             return;
         }
         Activity activity = ActivityManager.getActivity(args[2]);
         if (activity != null) {
-            sendLanguageString("feedback.already_used_activity_id", null, player, "%id%", args[2]);
+            sendLanguageString("feedback.already_used_activity_id",  player, "%id%", args[2]);
             return;
         }
         activity = new Activity(args[2]);
         ActivityManager.registerActivity(activity);
         //TODO open gui?
-        sendLanguageString("create.feedback", null, player, "%id%", args[2]);
+        sendLanguageString("create.feedback",  player, "%id%", args[2]);
     }
 
     //activity rename <id> <newId>
     private void rename(Player player, String label, String[] args) {
         if (args.length != 4) {
-            Util.sendMessage(player, this.craftFailFeedback(label, translate("rename.params", null, player),
-                    translateList("rename.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("rename.params",  player),
+                    translateList("rename.description",  player)));
             return;
         }
         Activity activity = ActivityManager.getActivity(args[2]);
         if (activity == null) {
-            sendLanguageString("feedback.invalid_activity_id", null, player, "%id%", args[2]);
+            sendLanguageString("feedback.invalid_activity_id",  player, "%id%", args[2]);
             return;
         }
         Activity newActivity = ActivityManager.getActivity(args[3]);
         if (newActivity != null) {
-            sendLanguageString("feedback.already_used_activity_id", null, player, "%id%", args[3]);
+            sendLanguageString("feedback.already_used_activity_id",  player, "%id%", args[3]);
             return;
         }
         ActivityManager.rename(activity, args[3]);
-        sendLanguageString("rename.feedback", null, player, "%id%", args[2], "%new_id%", args[3]);
+        sendLanguageString("rename.feedback",  player, "%id%", args[2], "%new_id%", args[3]);
     }
 
     //open <action id>
     private void open(Player player, String label, String[] args) {
         if (args.length != 3) {
-            Util.sendMessage(player, this.craftFailFeedback(label, translate("open.params", null, player),
-                    translateList("open.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("open.params",  player),
+                    translateList("open.description",  player)));
             return;
         }
         Activity activity = ActivityManager.getActivity(args[2]);
         if (activity == null) {
-            sendLanguageString("feedback.invalid_activity_id", null, player, "%id%", args[2]);
+            sendLanguageString("feedback.invalid_activity_id",  player, "%id%", args[2]);
             return;
         }
         player.openInventory(new ActivityGui(activity, player, null).getInventory());
@@ -156,58 +155,58 @@ public class ActivitySubCommand extends SubCmd {
 
     private void delete(Player player, String label, String[] args) {
         if (args.length != 3) {
-            Util.sendMessage(player, this.craftFailFeedback(label, translate("delete.params", null, player),
-                    translateList("delete.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("delete.params",  player),
+                    translateList("delete.description",  player)));
             return;
         }
         Activity activity = ActivityManager.getActivity(args[2]);
         if (activity == null) {
-            sendLanguageString("feedback.invalid_activity_id", null, player, "%id%", args[2]);
+            sendLanguageString("feedback.invalid_activity_id",  player, "%id%", args[2]);
             return;
         }
         ActivityManager.deleteActivity(activity);
-        sendLanguageString("delete.feedback", null, player, "%id%", args[2]);
+        sendLanguageString("delete.feedback",  player, "%id%", args[2]);
     }
 
     private void clone(Player player, String label, String[] args) {
         if (args.length != 4) {
-            Util.sendMessage(player, this.craftFailFeedback(label, translate("clone.params", null, player),
-                    translateList("clone.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("clone.params",  player),
+                    translateList("clone.description",  player)));
             return;
         }
         Activity activity = ActivityManager.getActivity(args[2]);
         if (activity == null) {
-            sendLanguageString("feedback.invalid_activity_id", null, player, "%id%", args[2]);
+            sendLanguageString("feedback.invalid_activity_id",  player, "%id%", args[2]);
             return;
         }
         Activity newActivity = ActivityManager.getActivity(args[3]);
         if (newActivity != null) {
-            sendLanguageString("feedback.already_used_activity_id", null, player, "%id%", args[3]);
+            sendLanguageString("feedback.already_used_activity_id",  player, "%id%", args[3]);
             return;
         }
         ActivityManager.clone(activity, args[3]);
         //TODO open gui
-        sendLanguageString("clone.feedback", null, player, "%id%", args[2], "%clone_id%", args[3]);
+        sendLanguageString("clone.feedback",  player, "%id%", args[2], "%clone_id%", args[3]);
     }
 
     //setconsumes <activity> <amount>
     private void setconsumes(Player player, String label, String[] args) {
         if (args.length != 4) {
-            Util.sendMessage(player, this.craftFailFeedback(label, translate("setconsumes.params", null, player),
-                    translateList("setconsumes.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("setconsumes.params",  player),
+                    translateList("setconsumes.description",  player)));
             return;
         }
         Activity activity = ActivityManager.getActivity(args[2]);
         if (activity == null) {
-            sendLanguageString("feedback.invalid_activity_id", null, player, "%id%", args[2]);
+            sendLanguageString("feedback.invalid_activity_id",  player, "%id%", args[2]);
             return;
         }
         int amount;
         try {
             amount = Integer.parseInt(args[3]);
         } catch (Exception e) {
-            Util.sendMessage(player, this.craftFailFeedback(label, translate("setconsumes.params", null, player),
-                    translateList("setconsumes.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("setconsumes.params",  player),
+                    translateList("setconsumes.description",  player)));
             //TODO NaN
             return;
         }
@@ -215,26 +214,26 @@ public class ActivitySubCommand extends SubCmd {
         amount = Math.max(0, amount);
 
         activity.setConsumes(amount);
-        sendLanguageString("setconsumes.feedback", null, player, "%id%", args[2],
+        sendLanguageString("setconsumes.feedback",  player, "%id%", args[2],
                 "%amount%", String.valueOf(amount));
     }
 
     //addcondition <activity> <conditiontype> <condition arguments>
     private void addcondition(Player player, String label, String[] args) {
         if (args.length < 4) {
-            Util.sendMessage(player, this.craftFailFeedback(label, translate("addcondition.params", null, player),
-                    translateList("addcondition.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("addcondition.params",  player),
+                    translateList("addcondition.description",  player)));
             return;
         }
         Activity activity = ActivityManager.getActivity(args[2]);
         if (activity == null) {
-            sendLanguageString("feedback.invalid_activity_id", null, player, "%id%", args[2]);
+            sendLanguageString("feedback.invalid_activity_id",  player, "%id%", args[2]);
             return;
         }
         ConditionType type = ConditionManager.getConditionType(args[3]);
         if (type == null) {
-            Util.sendMessage(player, this.craftFailFeedback(label, translate("addcondition.params", null, player),
-                    translateList("addcondition.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("addcondition.params",  player),
+                    translateList("addcondition.description",  player)));
             //TODO
             return;
         }
@@ -245,19 +244,19 @@ public class ActivitySubCommand extends SubCmd {
         try {
             condition = ConditionManager.read(b.toString());
         } catch (Exception e) {
-            Util.sendMessage(player, this.craftFailFeedback(label, translate("addcondition.params", null, player),
-                    translateList("addcondition.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("addcondition.params",  player),
+                    translateList("addcondition.description",  player)));
             //TODO bad format
             return;
         }
         if (condition == null) {
-            Util.sendMessage(player, this.craftFailFeedback(label, translate("addcondition.params", null, player),
-                    translateList("addcondition.description", null, player)));
+            Util.sendMessage(player, this.craftFailFeedback(label, translate("addcondition.params",  player),
+                    translateList("addcondition.description",  player)));
             //TODO invalid condition type
             return;
         }
         activity.addCondition(condition);
-        sendLanguageString("addcondition.feedback", null, player, "%id%", args[2],
+        sendLanguageString("addcondition.feedback",  player, "%id%", args[2],
                 "%condition%", condition.toString());
     }
 
@@ -372,7 +371,7 @@ public class ActivitySubCommand extends SubCmd {
                     case "removenoconsumesaction":
                         return CompleteUtility.complete(args[1], ActivityManager.getActivityIds());
                     default:
-                        return Collections.emptyList();
+                        return List.of();
                 }
             case 4:
                 switch (args[1].toLowerCase(Locale.ENGLISH)) {
@@ -390,7 +389,7 @@ public class ActivitySubCommand extends SubCmd {
                     case "insertnoconsumesaction":
                     case "setnoconsumesaction":
                     case "removenoconsumesaction":
-                        return Collections.emptyList();
+                        return List.of();
                     //? <condition id>
                     case "addcondition":
                         return CompleteUtility.complete(args[3], ConditionManager.getConditionTypeIds());
@@ -400,7 +399,7 @@ public class ActivitySubCommand extends SubCmd {
                     case "addnoconsumesaction":
                         return CompleteUtility.complete(args[3], ActionManager.getActionTypeIds());
                     default:
-                        return Collections.emptyList();
+                        return List.of();
                 }
             case 5:
                 switch (args[1].toLowerCase(Locale.ENGLISH)) {
@@ -421,10 +420,10 @@ public class ActivitySubCommand extends SubCmd {
                     case "removenoconsumesaction":
                         return CompleteUtility.complete(args[4], ActionManager.getActionTypeIds());
                     default:
-                        return Collections.emptyList();
+                        return List.of();
                 }
             default:
-                return Collections.emptyList();
+                return List.of();
         }
     }
     /*

@@ -25,7 +25,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ActionsGui implements Gui {
@@ -304,7 +303,7 @@ public class ActionsGui implements Gui {
         //info
         item = this.getGuiItem("gui.actions.info", Material.PAPER);
         meta = this.loadLanguageDescription(ItemUtils.getMeta(item), "gui.actions.info");
-        List<String> lore = new ArrayList<>(meta.hasLore() ? meta.getLore() : Collections.emptyList());
+        List<String> lore = new ArrayList<>(meta.hasLore() ? meta.getLore() : List.of());
         List<String> list = ActionsUtility.getActions(tagItem);
         if (list != null) {
             for (String action : list) {
@@ -396,10 +395,10 @@ public class ActionsGui implements Gui {
             }
             List<String> actions = ActionsUtility.getActions(tagItem);
             if (actions == null)
-                actions = Collections.emptyList();
+                actions = List.of();
             if (page > 1) {//based on page
                 if ((page - 1) * ROWS * 9 > actions.size()) {
-                    actions = Collections.emptyList();
+                    actions = List.of();
                 } else {
                     actions = actions.subList((page - 1) * ROWS * 9, actions.size());
                 }

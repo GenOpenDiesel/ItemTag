@@ -27,7 +27,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.TreeSet;
 
 public class Flag extends SubCmd {
 
@@ -36,7 +39,7 @@ public class Flag extends SubCmd {
 
     public Flag(ItemTagCommand cmd) {
         super("flag", cmd, true, true);
-        FLAG_ALIASES = new AliasSet<CustomFlag>("custom_flags") {
+        FLAG_ALIASES = new AliasSet<>("custom_flags", ItemTag.get()) {
             @Override
             public String getName(CustomFlag customFlag) {
                 return customFlag.getId();
@@ -91,7 +94,7 @@ public class Flag extends SubCmd {
 
             CustomFlag flag = FLAG_ALIASES.convertAlias(args[1]);
             if (flag == null) {
-                onWrongAlias("wrong-flag", p, FLAG_ALIASES);
+                onWrongAlias( p, FLAG_ALIASES);
                 onFail(p, alias);
                 return;
             }
@@ -100,7 +103,7 @@ public class Flag extends SubCmd {
             flag.setValue(tagItem, value);
             sendLanguageString(flag.getId() + ".feedback." +
                             (value == flag.defaultValue() ? "standard" : "custom")
-                    , null, p);
+                    ,  p);
         } catch (Exception e) {
             e.printStackTrace();
             onFail(p, alias);
@@ -114,7 +117,7 @@ public class Flag extends SubCmd {
             return CompleteUtility.complete(args[1], FLAG_ALIASES);
         if (args.length == 3)
             return CompleteUtility.complete(args[2], Aliases.BOOLEAN);
-        return Collections.emptyList();
+        return List.of();
     }
 
     public void registerFlag(CustomFlag flag) {

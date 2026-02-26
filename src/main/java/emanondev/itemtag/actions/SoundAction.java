@@ -6,7 +6,10 @@ import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 
 public class SoundAction extends Action {
 
@@ -70,20 +73,18 @@ public class SoundAction extends Action {
 
     @Override
     public List<String> tabComplete(CommandSender sender, List<String> params) {
-        switch (params.size()) {
-            case 1:
+        return switch (params.size()) {
+            case 1 -> {
                 if (Aliases.SOUND != null) {
-                    return CompleteUtility.complete(params.get(0), Aliases.SOUND);
+                    yield CompleteUtility.complete(params.get(0), Aliases.SOUND);
                 }
-                return Collections.emptyList();
-            case 2:
-                return CompleteUtility.complete(params.get(1), Arrays.asList("0.5", "1"));
-            case 3:
-                return CompleteUtility.complete(params.get(2), Arrays.asList("1", "2", "5", "10"));
-            case 4:
-                return CompleteUtility.complete(params.get(3), Arrays.asList("true", "false"));
-        }
-        return Collections.emptyList();
+                yield List.of();
+            }
+            case 2 -> CompleteUtility.complete(params.get(1), Arrays.asList("0.5", "1"));
+            case 3 -> CompleteUtility.complete(params.get(2), Arrays.asList("1", "2", "5", "10"));
+            case 4 -> CompleteUtility.complete(params.get(3), Arrays.asList("true", "false"));
+            default -> List.of();
+        };
     }
 
     @Override

@@ -8,7 +8,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class DelayedAction extends Action {
@@ -65,7 +64,7 @@ public class DelayedAction extends Action {
             default: {
                 Action sub = ActionHandler.getAction(params.get(1));
                 if (sub == null) {
-                    return Collections.emptyList();
+                    return List.of();
                 }
                 params.remove(0);
                 params.remove(0);

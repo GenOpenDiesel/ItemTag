@@ -58,28 +58,15 @@ public class EquipmentFlag extends CustomFlag {
             } catch (Throwable e) {
                 EntityEquipment equip = event.getPlayer().getEquipment();
                 if (equip != null) {
-                    switch (event.getSlotType().name()) {
-                        case "HAND":
-                            originalItem = equip.getItemInHand();
-                            break;
-                        case "LEGS":
-                            originalItem = equip.getLeggings();
-                            break;
-                        case "CHEST":
-                            originalItem = equip.getChestplate();
-                            break;
-                        case "HEAD":
-                            originalItem = equip.getHelmet();
-                            break;
-                        case "FEET":
-                            originalItem = equip.getBoots();
-                            break;
-                        case "OFF_HAND":
-                            originalItem = equip.getItemInOffHand();
-                            break;
-                        default:
-                            throw new IllegalArgumentException();
-                    }
+                    originalItem = switch (event.getSlotType().name()) {
+                        case "HAND" -> equip.getItemInHand();
+                        case "LEGS" -> equip.getLeggings();
+                        case "CHEST" -> equip.getChestplate();
+                        case "HEAD" -> equip.getHelmet();
+                        case "FEET" -> equip.getBoots();
+                        case "OFF_HAND" -> equip.getItemInOffHand();
+                        default -> throw new IllegalArgumentException();
+                    };
                 }
             }
             if (ItemUtils.isAirOrNull(originalItem)) {

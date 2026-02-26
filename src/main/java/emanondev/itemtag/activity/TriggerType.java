@@ -3,6 +3,7 @@ package emanondev.itemtag.activity;
 import emanondev.itemedit.utility.InventoryUtils;
 import emanondev.itemtag.ItemTag;
 import emanondev.itemtag.TagItem;
+import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
@@ -20,6 +21,7 @@ import java.util.regex.Pattern;
 
 public class TriggerType<E extends Event> {
 
+    @Getter
     private final String id;
     private final Class<E> eventType;
 
@@ -28,10 +30,6 @@ public class TriggerType<E extends Event> {
             throw new IllegalArgumentException();
         this.id = id;
         this.eventType = e;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public ItemStack handle(E event, @NotNull Player p, ItemStack item, EquipmentSlot slot) {

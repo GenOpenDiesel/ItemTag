@@ -175,7 +175,7 @@ public class Effects extends ListenerSubCmd {
                         return CompleteUtility.complete(args[2], Aliases.EQUIPMENT_SLOTS);
                     }
                 }
-                return Collections.emptyList();
+                return List.of();
             }
             case 4: {
                 switch (args[1].toLowerCase()) {
@@ -187,7 +187,7 @@ public class Effects extends ListenerSubCmd {
                         return CompleteUtility.complete(args[3], Aliases.EQUIPMENT_SLOTS);
                     }
                 }
-                return Collections.emptyList();
+                return List.of();
             }
             case 5:
             case 6:
@@ -201,16 +201,16 @@ public class Effects extends ListenerSubCmd {
                         return CompleteUtility.complete(args[4], Aliases.EQUIPMENT_SLOTS);
                     }
                 }
-                return Collections.emptyList();
+                return List.of();
             }
             case 8: {
                 if ("slots".equalsIgnoreCase(args[1])) {
                     return CompleteUtility.complete(args[4], Aliases.EQUIPMENT_SLOTS);
                 }
-                return Collections.emptyList();
+                return List.of();
             }
         }
-        return Collections.emptyList();
+        return List.of();
     }
 
     private Map<PotionEffectType, PotionEffect> getPotionEffects(ItemStack item, EquipmentSlot slot, boolean ignoreInstant) {

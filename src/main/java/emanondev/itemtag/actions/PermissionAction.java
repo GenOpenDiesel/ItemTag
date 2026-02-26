@@ -5,7 +5,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class PermissionAction extends Action {
@@ -46,13 +45,13 @@ public class PermissionAction extends Action {
     public List<String> tabComplete(CommandSender sender, List<String> params) {
         switch (params.size()) {
             case 1:
-                return Collections.emptyList();
+                return List.of();
             case 2:
                 return CompleteUtility.complete(params.get(1), ActionHandler.getTypes());
             default: {
                 Action sub = ActionHandler.getAction(params.get(1));
                 if (sub == null) {
-                    return Collections.emptyList();
+                    return List.of();
                 }
                 params.remove(0);
                 params.remove(0);

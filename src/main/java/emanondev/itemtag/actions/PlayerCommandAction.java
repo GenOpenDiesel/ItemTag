@@ -44,7 +44,7 @@ public class PlayerCommandAction extends Action {
         if (params.get(params.size() - 1).startsWith("%")) {
             return CompleteUtility.complete(params.get(params.size() - 1), Collections.singletonList("%player%"));
         }
-        return Collections.emptyList();
+        return List.of();
     }
 
 
