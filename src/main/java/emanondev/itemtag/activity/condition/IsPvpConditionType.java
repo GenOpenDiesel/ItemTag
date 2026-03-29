@@ -17,17 +17,14 @@ public class IsPvpConditionType extends BooleanValueConditionType {
 
     @Override
     public boolean getCurrentValue(@NotNull Player player, @NotNull ItemStack item, Event event) {
-        if (!(event instanceof EntityDamageByEntityEvent))
+        if (!(event instanceof EntityDamageByEntityEvent evt))
             return false;
-        EntityDamageByEntityEvent evt = (EntityDamageByEntityEvent) event;
         if (evt.getEntity() instanceof Player)
             return false;
-        if (evt.getDamager() instanceof Projectile) {
-            Projectile prj = (Projectile) evt.getDamager();
+        if (evt.getDamager() instanceof Projectile prj) {
             return prj.getShooter() instanceof Player;
         }
-        if (evt.getDamager() instanceof TNTPrimed) {
-            TNTPrimed tnt = (TNTPrimed) evt.getDamager();
+        if (evt.getDamager() instanceof TNTPrimed tnt) {
             return tnt.getSource() instanceof Player;
         }
         return evt.getDamager() instanceof Player;

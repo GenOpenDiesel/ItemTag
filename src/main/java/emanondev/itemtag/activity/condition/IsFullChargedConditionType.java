@@ -15,13 +15,11 @@ public class IsFullChargedConditionType extends BooleanValueConditionType {
 
     @Override
     protected boolean getCurrentValue(@NotNull Player player, @NotNull ItemStack item, Event event) {
-        if (!(event instanceof EntityDamageByEntityEvent))
+        if (!(event instanceof EntityDamageByEntityEvent evt))
             return false;
-        EntityDamageByEntityEvent evt = (EntityDamageByEntityEvent) event;
-        if (!(evt.getDamager() instanceof HumanEntity))
+        if (!(evt.getDamager() instanceof HumanEntity human))
             return true;
 
-        HumanEntity human = (HumanEntity) evt.getDamager();
         return human.getAttackCooldown() == 1;
     }
 }

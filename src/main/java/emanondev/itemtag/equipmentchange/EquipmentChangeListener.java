@@ -22,11 +22,10 @@ public class EquipmentChangeListener extends EquipmentChangeListenerBase {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void event(InventoryClickEvent event) {
         ItemTag.get().log(event.getAction().name());
-        if (!(event.getWhoClicked() instanceof Player))
+        if (!(event.getWhoClicked() instanceof Player p))
             return;
         if (event.getWhoClicked().hasMetadata("NPC") || event.getWhoClicked().hasMetadata("BOT"))
             return;
-        Player p = (Player) event.getWhoClicked();
         EquipmentSlot clickedSlot = getEquipmentSlotAtPosition(event.getRawSlot(), p, event.getView());
         switch (event.getAction()) {
             case CLONE_STACK:
@@ -157,11 +156,10 @@ public class EquipmentChangeListener extends EquipmentChangeListenerBase {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     private void event(EntityPickupItemEvent event) {
-        if (!(event.getEntity() instanceof Player))
+        if (!(event.getEntity() instanceof Player p))
             return;
         if (event.getEntity().hasMetadata("NPC"))
             return;
-        Player p = (Player) event.getEntity();
 
         if (!ItemUtils.isAirOrNull(getEquip(p, EquipmentSlot.HAND)))
             return;

@@ -19,11 +19,10 @@ import java.util.ArrayList;
 public class EquipmentChangeListenerUpTo1_13 extends EquipmentChangeListenerBase {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void event(final InventoryClickEvent event) {
-        if (!(event.getWhoClicked() instanceof Player))
+        if (!(event.getWhoClicked() instanceof Player p))
             return;
         if (event.getWhoClicked().hasMetadata("NPC"))
             return;
-        Player p = (Player) event.getWhoClicked();
         EquipmentSlot clickedSlot = getEquipmentSlotAtPosition(event.getRawSlot(), p, event.getView());
 
         switch (event.getAction()) {

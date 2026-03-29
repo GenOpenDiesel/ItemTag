@@ -51,8 +51,9 @@ public class StringListArgument extends Argument {
     public String toString() {
         StringBuilder b = new StringBuilder();
         for (String arg : values) {
-            if (b.length() != 0)
+            if (!b.isEmpty()) {
                 b.append(separator);
+            }
             b.append(arg).append(separator);
         }
         return b.toString();

@@ -44,16 +44,19 @@ public class EnumSetArgument<E extends Enum<E>> extends Argument {
     public String toString() {
         StringBuilder standard = new StringBuilder();
         StringBuilder reversed = new StringBuilder("!");
-        for (E e : clazz.getEnumConstants())
+        for (E e : clazz.getEnumConstants()) {
             if (values.contains(e)) {
-                if (standard.length() != 0)
+                if (!standard.isEmpty()) {
                     standard.append(separator);
+                }
                 standard.append(e.name());
             } else {
-                if (reversed.length() != 1)
+                if (reversed.length() != 1) {
                     reversed.append(separator);
+                }
                 reversed.append(e.name());
             }
+        }
         return (standard.length() <= reversed.length() ? standard : reversed).toString();
     }
 }

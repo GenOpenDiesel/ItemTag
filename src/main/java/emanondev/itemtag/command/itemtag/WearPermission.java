@@ -155,9 +155,6 @@ public class WearPermission extends ListenerSubCmd {
             return true;
         }
         String perm = tagItem.getString(WEAR_KEY);
-        if (player.hasPermission(perm)) {
-            return true;
-        }
-        return false;
+        return player.hasPermission(perm);
     }
 }

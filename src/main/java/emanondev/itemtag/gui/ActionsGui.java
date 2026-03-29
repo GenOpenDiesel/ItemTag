@@ -473,8 +473,8 @@ public class ActionsGui implements Gui {
                         item = this.getGuiItem("gui.actionslines.line", Material.valueOf("COMMAND"));
                     }
                     ItemMeta meta = item.getItemMeta();
-                    String action = this.getPlugin().getLanguageConfig(target).getMessage("gui.actionslines.actionformat"
-                            , "", "%type%", actionPre, "%info%", actionPost);
+                    String action = this.getPlugin().getTranslator().translate(target,"gui.actionslines.actionformat",
+                            "%type%", actionPre, "%info%", actionPost);
                     this.loadLanguageDescription(meta, "gui.actionslines.element", "%action%", action);
                     item.setAmount(Math.min(125, elementIndex + 1));
                     item.setItemMeta(meta);

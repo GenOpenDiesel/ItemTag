@@ -61,23 +61,19 @@ public class TriggerListener implements Listener {
 
     @EventHandler
     private void event(EntityDamageByEntityEvent event) {
-        if (event.getDamager() instanceof Player) {
-            Player player = (Player) event.getDamager();
+        if (event.getDamager() instanceof Player player) {
             for (EquipmentSlot slot : InventoryUtils.getPlayerEquipmentSlots()) {
                 MELEE_HIT.handle(event, player, player.getInventory().getItem(slot), slot);
             }
         }
-        if (event.getDamager() instanceof Projectile) {
-            Projectile prj = (Projectile) event.getDamager();
-            if (prj.getShooter() instanceof Player) {
-                Player player = (Player) prj.getShooter();
+        if (event.getDamager() instanceof Projectile prj) {
+            if (prj.getShooter() instanceof Player player) {
                 for (EquipmentSlot slot : InventoryUtils.getPlayerEquipmentSlots()) {
                     RANGED_HIT.handle(event, player, player.getInventory().getItem(slot), slot);
                 }
             }
         }
-        if (event.getEntity() instanceof Player) {
-            Player player = (Player) event.getEntity();
+        if (event.getEntity() instanceof Player player) {
             for (EquipmentSlot slot : InventoryUtils.getPlayerEquipmentSlots()) {
                 HITTED.handle(event, player, player.getInventory().getItem(slot), slot);
             }

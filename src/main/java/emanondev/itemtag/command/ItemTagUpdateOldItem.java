@@ -54,11 +54,10 @@ public class ItemTagUpdateOldItem implements TabExecutor {
             sendPermissionLackMessage(permission, sender);
             return true;
         }
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player player)) {
             sendPlayerOnly(sender);
             return false;
         }
-        Player player = ((Player) sender);
         ItemStack item = ItemUtils.getHandItem(player);
         if (ItemUtils.isAirOrNull(item)) {
             sendNoItemInHand(sender);

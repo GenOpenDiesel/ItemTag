@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 public class SpigotTagItem implements TagItem {
 
-    private static final HashMap<String, NamespacedKey> keys = new HashMap<String, NamespacedKey>() {
+    private static final HashMap<String, NamespacedKey> keys = new HashMap<>() {
         @Override
         public NamespacedKey get(Object key) {
             NamespacedKey keyN = super.get(key);

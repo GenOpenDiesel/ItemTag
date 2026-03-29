@@ -96,11 +96,10 @@ public abstract class EquipmentChangeListenerBase implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void event(InventoryDragEvent event) {
-        if (!(event.getWhoClicked() instanceof Player))
+        if (!(event.getWhoClicked() instanceof Player p))
             return;
         if (event.getWhoClicked().hasMetadata("NPC") || event.getWhoClicked().hasMetadata("BOT"))
             return;
-        Player p = (Player) event.getWhoClicked();
         for (EquipmentSlot type : InventoryUtils.getPlayerEquipmentSlots()) {
             int pos = getSlotPosition(type, p, event.getView());
             if (pos != -1 && event.getNewItems().containsKey(pos)) {
@@ -179,8 +178,7 @@ public abstract class EquipmentChangeListenerBase implements Listener {
             return;
         }
 
-        if (event.getRightClicked() instanceof Sheep) {
-            Sheep sheep = (Sheep) event.getRightClicked();
+        if (event.getRightClicked() instanceof Sheep sheep) {
             if (sheep.isSheared())
                 return;
             if (!handItem.getType().name().endsWith("_DYE"))
