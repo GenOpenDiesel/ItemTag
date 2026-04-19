@@ -30,7 +30,7 @@ public class ConditionManager {
         if (conditionTypes.containsKey(id))
             throw new IllegalArgumentException();
         conditionTypes.put(id, condition);
-        ItemTag.get().log("ConditionManager registered Condition Type &e" + condition.getId());
+        ItemTag.get().log("ConditionManager registered Condition Type <yellow>" + condition.getId());
     }
 
     public static void load() {

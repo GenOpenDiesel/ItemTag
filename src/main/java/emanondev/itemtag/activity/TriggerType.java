@@ -51,8 +51,8 @@ public class TriggerType<E extends Event> {
         boolean satisfied = true;
         for (ConditionType.Condition cond : activity.getConditions()) {
             if (!cond.isCompatible(event)) {
-                ItemTag.get().log("Incompatible Condition &e" + cond + "&f from Activity &e"
-                        + activity.getId() + "&f used on Trigger &e" + getId());
+                ItemTag.get().log("Incompatible Condition <yellow>" + cond + "<white> from Activity <yellow>"
+                        + activity.getId() + "<white> used on Trigger <yellow>" + getId());
                 return item;
             }
             try {
@@ -127,8 +127,8 @@ public class TriggerType<E extends Event> {
                                 String actionType) {
         for (ActionType.Action action : actions) {
             if (!action.isAssignable(event)) {
-                ItemTag.get().log("Incompatible Action &e" + action + "&f from Activity " + actionType + " &e"
-                        + activity.getId() + "&f used on Trigger &e" + getId() + "&f, skipping it");
+                ItemTag.get().log("Incompatible Action <yellow>" + action + "<white> from Activity " + actionType + " <yellow>"
+                        + activity.getId() + "<white> used on Trigger <yellow>" + getId() + "<white>, skipping it");
                 continue;
             }
             try {

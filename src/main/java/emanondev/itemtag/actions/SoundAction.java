@@ -90,11 +90,11 @@ public class SoundAction extends Action {
     @Override
     public List<String> getInfo() {
         ArrayList<String> list = new ArrayList<>();
-        list.add("&b" + getID() + " &e<sound> [volume] [pitch] [self]");
-        list.add("&e<sound> &bthe sound to play");
-        list.add("&e[volume] &bthe volume of the sound, default 1");
-        list.add("&e[pitch] &bthe pitch of the sound, default 1");
-        list.add("&e[self] &bonly player sould heard?, by default false");
+        list.add("<aqua>" + getID() + " <yellow><sound> [volume] [pitch] [self]");
+        list.add("<yellow><sound> <aqua>the sound to play");
+        list.add("<yellow>[volume] <aqua>the volume of the sound, default 1");
+        list.add("<yellow>[pitch] <aqua>the pitch of the sound, default 1");
+        list.add("<yellow>[self] <aqua>only player sould heard?, by default false");
         return list;
     }
 }

@@ -536,10 +536,10 @@ public class Actions extends ListenerSubCmd {
                                     event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(msg));
                                     break;
                                 }
-                                ItemTag.get().log("Invalid action cooldown message type &e" + type + "&f not available on this server version");
+                                ItemTag.get().log("Invalid action cooldown message type <yellow>" + type + "<white> not available on this server version");
                                 break;
                             default:
-                                ItemTag.get().log("Invalid action cooldown message type &e" + type);
+                                ItemTag.get().log("Invalid action cooldown message type <yellow>" + type);
                         }
 
                         return;

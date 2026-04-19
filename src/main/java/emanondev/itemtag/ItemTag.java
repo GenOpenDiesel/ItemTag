@@ -156,11 +156,11 @@ public class ItemTag extends APlugin {
                     updating = true;
                 }
                 if (updating) {
-                    log("Updated item &e" + id);
+                    log("Updated item <yellow>" + id);
                     ActionsUtility.setActions(tagItem, actions);
                     storage.setItem(id, tagItem.getItem());
                 }
-                log("&cWARNING");
+                log("<red>WARNING");
                 log("A severe security bug was patched, items from (/serveritem or /si)");
                 log("have been updated to match security standards, however items inside");
                 log("players inventories haven't been updated and may stop working if they");

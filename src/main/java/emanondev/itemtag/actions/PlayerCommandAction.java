@@ -51,10 +51,10 @@ public class PlayerCommandAction extends Action {
     @Override
     public List<String> getInfo() {
         ArrayList<String> list = new ArrayList<>();
-        list.add("&b" + getID() + " &e<command>");
-        list.add("&e<command> &bcommand executed by player");
-        list.add("&b%player% may be used as placeholder for player name");
-        list.add("&bN.B. no &e/&b is required, example: '&ehome&b'");
+        list.add("<aqua>" + getID() + " <yellow><command>");
+        list.add("<yellow><command> <aqua>command executed by player");
+        list.add("<aqua>%player% may be used as placeholder for player name");
+        list.add("<aqua>N.B. no <yellow>/<aqua> is required, example: '<yellow>home<aqua>'");
         return list;
     }
 

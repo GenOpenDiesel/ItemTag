@@ -79,32 +79,31 @@ public class ConsumeActions extends ListenerSubCmd {
     private void info(Player sender, String label, String[] args, ItemStack item) {
         TagItem tagItem = ItemTag.getTagItem(item);
         if (!tagItem.hasStringTag(ACTIONS_KEY)) {
-            Util.sendMessage(sender,
-                    ChatColor.translateAlternateColorCodes('&', "&cThis item has no consume actions binded"));
+            Util.sendMessage(sender,"<red>This item has no consume actions binded");
             return;
         }
 
         ArrayList<String> list = new ArrayList<>();
-        list.add("&b&lItemTag Consume Actions Info");
+        list.add("<aqua><bold>ItemTag Consume Actions Info");
         String permission = tagItem.hasStringTag(ACTION_PERMISSION_KEY)
                 ? tagItem.getString(ACTION_PERMISSION_KEY)
                 : null;
         if (permission != null)
-            list.add("&bTo use this item &e" + permission + "&b permission is required");
+            list.add("<aqua>To use this item <yellow>" + permission + "<aqua> permission is required");
         else
-            list.add("&bTo use this item no permission is required");
+            list.add("<aqua>To use this item no permission is required");
         long cooldown = tagItem.getInteger(ACTION_COOLDOWN_KEY, 0);
         String cooldownId = tagItem.getString(ACTION_COOLDOWN_ID_KEY, "default");
         if (cooldown > 0)
-            list.add("&bUsing this item multiple times apply a cooldown of &e" + (cooldown / 1000)
-                    + " &bseconds, cooldown ID is &e" + cooldownId);
+            list.add("<aqua>Using this item multiple times apply a cooldown of <yellow>" + (cooldown / 1000)
+                    + " <aqua>seconds, cooldown ID is <yellow>" + cooldownId);
 
-        list.add("&bExecuted actions are:");
+        list.add("<aqua>Executed actions are:");
         List<String> actions = tagItem.getStringList(ACTIONS_KEY);
         for (String action : actions)
-            list.add("&b- &6" + action.split(TYPE_SEPARATOR)[0] + " &e" + action.split(TYPE_SEPARATOR)[1]);
+            list.add("<aqua>- <gold>" + action.split(TYPE_SEPARATOR)[0] + " <yellow>" + action.split(TYPE_SEPARATOR)[1]);
 
-        Util.sendMessage(sender, ChatColor.translateAlternateColorCodes('&', String.join("\n", list)));
+        Util.sendMessage(sender,  String.join("\n", list));
     }
 
     // itemtag actions setpermission <permission>
@@ -181,8 +180,8 @@ public class ConsumeActions extends ListenerSubCmd {
             } catch (Exception e) {
                 Util.sendMessage(p,
                         ChatColor.translateAlternateColorCodes('&',
-                                "&c'&6" + actionType + "&c' is not a valid type\n&cValid types &e"
-                                        + String.join("&c, &e", ActionHandler.getTypes())));
+                                "<red>'<gold>" + actionType + "<red>' is not a valid type\n<red>Valid types <yellow>"
+                                        + String.join("<red>, <yellow>", ActionHandler.getTypes())));
                 return;
             }
             try {
@@ -190,7 +189,7 @@ public class ConsumeActions extends ListenerSubCmd {
             } catch (Exception e) {
                 Util.sendMessage(p,
                         ChatColor.translateAlternateColorCodes('&',
-                                "&c'&6" + actionInfo + "&c' is not a valid info for &6" + actionType + "\n"
+                                "<red>'<gold>" + actionInfo + "<red>' is not a valid info for <gold>" + actionType + "\n"
                                         + String.join("\n", ActionHandler.getAction(actionType).getInfo())));
                 return;
             }
@@ -247,8 +246,8 @@ public class ConsumeActions extends ListenerSubCmd {
             } catch (Exception e) {
                 Util.sendMessage(p,
                         ChatColor.translateAlternateColorCodes('&',
-                                "&c'&6" + actionType + "&c' is not a valid type\n&cValid types &e"
-                                        + String.join("&c, &e", ActionHandler.getTypes())));
+                                "<red>'<gold>" + actionType + "<red>' is not a valid type\n<red>Valid types <yellow>"
+                                        + String.join("<red>, <yellow>", ActionHandler.getTypes())));
                 return;
             }
             try {
@@ -256,7 +255,7 @@ public class ConsumeActions extends ListenerSubCmd {
             } catch (Exception e) {
                 Util.sendMessage(p,
                         ChatColor.translateAlternateColorCodes('&',
-                                "&c'&6" + actionInfo + "&c' is not a valid info for &6" + actionType + "\n"
+                                "<red>'<gold>" + actionInfo + "<red>' is not a valid info for <gold>" + actionType + "\n"
                                         + String.join("\n", ActionHandler.getAction(actionType).getInfo())));
                 return;
             }
@@ -292,8 +291,8 @@ public class ConsumeActions extends ListenerSubCmd {
             } catch (Exception e) {
                 Util.sendMessage(p,
                         ChatColor.translateAlternateColorCodes('&',
-                                "&c'&6" + actionType + "&c' is not a valid type\n&cValid types &e"
-                                        + String.join("&c, &e", ActionHandler.getTypes())));
+                                "<red>'<gold>" + actionType + "<red>' is not a valid type\n<red>Valid types <yellow>"
+                                        + String.join("<red>, <yellow>", ActionHandler.getTypes())));
                 return;
             }
             try {
@@ -301,7 +300,7 @@ public class ConsumeActions extends ListenerSubCmd {
             } catch (Exception e) {
                 Util.sendMessage(p,
                         ChatColor.translateAlternateColorCodes('&',
-                                "&c'&6" + actionInfo + "&c' is not a valid info for &6" + actionType + "\n"
+                                "<red>'<gold>" + actionInfo + "<red>' is not a valid info for <gold>" + actionType + "\n"
                                         + String.join("\n", ActionHandler.getAction(actionType).getInfo())));
                 return;
             }

@@ -39,7 +39,7 @@ public class ItemTagUpdateOldItem implements TabExecutor {
     public void sendPermissionLackMessage(@NotNull String permission,
                                           CommandSender sender) {
         Util.sendMessage(sender, plugin.getLanguageConfig(sender)
-                .loadMessage("lack-permission", "&cYou lack of permission %permission%",
+                .loadMessage("lack-permission", "<red>You lack of permission %permission%",
                         sender instanceof Player ? (Player) sender : null, true
                         , "%permission%",
                         permission));
@@ -99,13 +99,13 @@ public class ItemTagUpdateOldItem implements TabExecutor {
 
     public void sendPlayerOnly(CommandSender sender) {
         Util.sendMessage(sender, plugin.getLanguageConfig(sender)
-                .loadMessage("player-only", "&cCommand for Players only",
+                .loadMessage("player-only", "<red>Command for Players only",
                         sender instanceof Player ? (Player) sender : null, true));
     }
 
     public void sendNoItemInHand(CommandSender sender) {
         Util.sendMessage(sender, plugin.getLanguageConfig(sender)
-                .loadMessage("no-item-on-hand", "&cYou need to hold an item in hand",
+                .loadMessage("no-item-on-hand", "<red>You need to hold an item in hand",
                         sender instanceof Player ? (Player) sender : null, true));
     }
 

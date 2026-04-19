@@ -40,9 +40,9 @@ public class MessageAction extends Action {
     @Override
     public List<String> getInfo() {
         ArrayList<String> list = new ArrayList<>();
-        list.add("&b" + getID() + " &e<message>");
-        list.add("&e<message>&b message sent to player");
-        list.add("&b%player% may be used as placeholder for player name");
+        list.add("<aqua>" + getID() + " <yellow><message>");
+        list.add("<yellow><message><aqua> message sent to player");
+        list.add("<aqua>%player% may be used as placeholder for player name");
         return list;
     }
 

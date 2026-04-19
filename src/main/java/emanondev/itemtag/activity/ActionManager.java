@@ -25,7 +25,7 @@ public class ActionManager {
         if (actionTypes.containsKey(id))
             throw new IllegalArgumentException();
         actionTypes.put(id, action);
-        ItemTag.get().log("ActionManager registered Action Type &e" + action.getId());
+        ItemTag.get().log("ActionManager registered Action Type <yellow>" + action.getId());
     }
 
     public static void load() {

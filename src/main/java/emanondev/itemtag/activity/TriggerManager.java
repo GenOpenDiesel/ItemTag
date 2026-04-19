@@ -16,7 +16,7 @@ public class TriggerManager {
         if (triggerTypes.containsKey(type.getId()))
             throw new IllegalArgumentException();
         triggerTypes.put(type.getId(), type);
-        ItemTag.get().log("TriggerManager registered Trigger Type &e" + type.getId());
+        ItemTag.get().log("TriggerManager registered Trigger Type <yellow>" + type.getId());
     }
 
     public static TriggerType getTriggerType(@Nullable String id) {

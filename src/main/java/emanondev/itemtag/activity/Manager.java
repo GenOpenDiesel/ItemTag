@@ -23,13 +23,13 @@ public abstract class Manager<T extends Factory, S extends Factory.Element> {
         if (types.containsKey(id))
             throw new IllegalArgumentException();
         types.put(id, factory);
-        ItemTag.get().log(name + "Manager registered " + name + " Type &e" + factory.getId());
+        ItemTag.get().log(name + "Manager registered " + name + " Type <yellow>" + factory.getId());
     }
 
     public void unregister(@NotNull T factory) {
         String id = factory.getId();
         types.remove(id);
-        ItemTag.get().log(name + "Manager unregistered " + name + " Type &e" + factory.getId());
+        ItemTag.get().log(name + "Manager unregistered " + name + " Type <yellow>" + factory.getId());
     }
 
     public abstract void load();

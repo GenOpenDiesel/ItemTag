@@ -24,18 +24,18 @@ public class ActivityManager {
         for (String key : config.getKeys(false)) {
             try {
                 if (!Pattern.compile("[a-z][_a-z0-9]*").matcher(key).matches()) {
-                    ItemTag.get().log("Unable to load activity &e" + key + " &ffor invalid id, skipping it, id must start with a letter and may be followed by letters, numbers or underscores (regex &e[a-z][_a-z0-9]*&f)");
+                    ItemTag.get().log("Unable to load activity <yellow>" + key + " <white>for invalid id, skipping it, id must start with a letter and may be followed by letters, numbers or underscores (regex <yellow>[a-z][_a-z0-9]*<white>)");
                     continue;
                 }
                 Activity activity = new Activity(key);
                 activities.put(activity.getId(), activity);
                 counter++;
             } catch (Exception e) {
-                ItemTag.get().log("Unable to load activity &e" + key + " &ffor unknown error");
+                ItemTag.get().log("Unable to load activity <yellow>" + key + " <white>for unknown error");
                 e.printStackTrace();
             }
         }
-        ItemTag.get().log("Loaded &e" + counter + " &factivities");
+        ItemTag.get().log("Loaded <yellow>" + counter + " <white>activities");
     }
 
     public static void registerActivity(@NotNull Activity activity) {
