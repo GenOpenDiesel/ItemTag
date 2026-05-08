@@ -3,11 +3,11 @@ no-item-on-hand: '<dark_red>[<red>ItemTag<dark_red>] <red>You need to hold an it
 lack-permission: '<dark_red>[<red>ItemTag<dark_red>] <red>You lack of permission %permission%'
 lack-permission-generic: '<dark_red>[<red>ItemTag<dark_red>] <red>You don''t have permission to use this command'
 itemtag:
-  help-header: '<blue>&lItemTag - Help'
+  help-header: '<blue><bold>ItemTag - Help'
   flag:
     wrong-flag: '<dark_red>[<red>ItemTag<dark_red>] <red>Wrong Flag Value! <dark_red>[<gold>hover here<dark_red>]'
     description:
-      - '<aqua>&lToggle Custom flags on the item'
+      - '<aqua><bold>Toggle Custom flags on the item'
       - ''
       - '<yellow><flag> <aqua>flag name'
       - '<yellow>[true/false] <aqua>flag value, by default toggle'
@@ -68,13 +68,13 @@ itemtag:
   actions:
     invalid-action:
       message: '<dark_red>[<red>ItemTag<dark_red>] <red>''<gold>%error%<red>'' is not a valid type <dark_red>[<gold>hover here<dark_red>]'
-      hover-pre: '<gold>&lValid types'
+      hover-pre: '<gold><bold>Valid types'
       first_color: '<aqua>'
       second_color: '<yellow>'
     invalid-actioninfo:
       message: '<dark_red>[<red>ItemTag<dark_red>] <red>''<gold>%error%<red>'' is not a valid info for <gold>%action% <dark_red>[<gold>hover here<dark_red>]'
     description:
-      - '<aqua>&lSets actions done when the item is used'
+      - '<aqua><bold>Sets actions done when the item is used'
       - ''
       - '<yellow>Add <type> <action> <aqua>- add selected action'
       - '<yellow>Set <line> <type> <action> <aqua>- replace action on chosen line'
@@ -91,7 +91,7 @@ itemtag:
     add:
       params: 'add <type> <action>'
       description:
-        - '<aqua>&lAdd selected action'
+        - '<aqua><bold>Add selected action'
         - ''
         - '<yellow><type> <aqua>type of action'
         - '<yellow><action> <aqua>additional info for action'
@@ -99,7 +99,7 @@ itemtag:
     addline:
       params: 'addline <line> <type> <action>'
       description:
-        - '<aqua>&lAdd selected action on selected line'
+        - '<aqua><bold>Add selected action on selected line'
         - ''
         - '<yellow><line> <aqua>line to add'
         - '<yellow><type> <aqua>type of action'
@@ -108,7 +108,7 @@ itemtag:
     set:
       params: 'set <line> <type> <action>'
       description:
-        - '<aqua>&lReplace action on selected line'
+        - '<aqua><bold>Replace action on selected line'
         - ''
         - '<yellow><line> <aqua>the line to replace'
         - '<yellow><type> <aqua>type of action'
@@ -117,14 +117,14 @@ itemtag:
     remove:
       params: 'remove <line>'
       description:
-        - '<aqua>&lRemove action on selected line'
+        - '<aqua><bold>Remove action on selected line'
         - ''
         - '<yellow><line> <aqua>the line to remove'
       feedback: '<blue>[<white>ItemTag<blue>] <green>Removed line <yellow>%line% <green>(<yellow>%action%<green>)'
     permission:
       params: 'permission [permission]'
       description:
-        - '<aqua>&lSet permission to use this item'
+        - '<aqua><bold>Set permission to use this item'
         - ''
         - '<yellow>[permission] <aqua>the permission to set, by default none'
       feedback:
@@ -133,7 +133,7 @@ itemtag:
     cooldown:
       params: 'cooldown [ms]'
       description:
-        - '<aqua>&lSet a cooldown to use an item again'
+        - '<aqua><bold>Set a cooldown to use an item again'
         - ''
         - '<yellow>[ms] <aqua>how much time before being able to use'
         - '     <aqua>the item again, by default 0'
@@ -146,7 +146,7 @@ itemtag:
     cooldownid:
       params: 'cooldownid [id]'
       description:
-        - '<aqua>&lSet a cooldown id for an item'
+        - '<aqua><bold>Set a cooldown id for an item'
         - ''
         - '<yellow>[id] <aqua>how much time before being able to use the item again'
         - '<aqua>Note: cooldown is set based on cooldownid, different'
@@ -156,7 +156,7 @@ itemtag:
         removed: '<blue>[<white>ItemTag<blue>] <green>This item use <yellow>default <green>id for cooldown'
     cooldownmsg:
       description:
-        - '<aqua>&lSet a cooldown message'
+        - '<aqua><bold>Set a cooldown message'
         - ''
         - '<yellow>[message] <aqua>the message to show when the item can''t be used'
         - '  <aqua>yet while the cooldown is active'
@@ -166,7 +166,7 @@ itemtag:
         removed: '<blue>[<white>ItemTag<blue>] <green>Feedback Message for cooldown removed'
     cooldownmsgtype:
       description:
-        - '<aqua>&lSet a cooldown message type'
+        - '<aqua><bold>Set a cooldown message type'
         - ''
         - '<yellow>[type] <aqua>chat or actionbar'
       params: 'cooldownmsgtype [type]'
@@ -175,7 +175,7 @@ itemtag:
     uses:
       params: 'uses [amount]'
       description:
-        - '<aqua>&lSet how many times the item can be used'
+        - '<aqua><bold>Set how many times the item can be used'
         - ''
         - '<aqua>Note: use <yellow>-1 <aqua>for unlimited uses'
       feedback:
@@ -184,7 +184,7 @@ itemtag:
     maxuses:
       params: 'maxuses [amount]'
       description:
-        - '<aqua>&lSet max uses for the item'
+        - '<aqua><bold>Set max uses for the item'
         - '<aqua>Used mainly for aesthetic purposes with'
         - '<aqua>display uses as true'
         - ''
@@ -195,7 +195,7 @@ itemtag:
     consume:
       params: 'consume [true/false]'
       description:
-        - '<gold>&lConsume the item on last use'
+        - '<gold><bold>Consume the item on last use'
         - ''
         - '<aqua>Note: when true and the item consume'
         - '<aqua> it''s last use, the item is destroyed'
@@ -205,7 +205,7 @@ itemtag:
     visualcooldown:
       params: 'visualcooldown [true/false]'
       description:
-        - '<gold>&lVisual display cooldown time left'
+        - '<gold><bold>Visual display cooldown time left'
         - ''
         - '<aqua>When true apply a cooldown effect similar to'
         - '<aqua>ender pearls cooldown to the item'
@@ -218,7 +218,7 @@ itemtag:
     displayuses:
       params: 'displayuses [true/false]'
       description:
-        - '<gold>&lDisplay uses left'
+        - '<gold><bold>Display uses left'
         - ''
         - '<aqua>When true adds a line to describe'
         - '<aqua>how many uses are left'
@@ -230,7 +230,7 @@ itemtag:
         unset: '<blue>[<white>ItemTag<blue>] <green>Now item won''t show uses left and max uses'
   activity:
     description:
-      - '<aqua>&lSets an activity (some actions)'
+      - '<aqua><bold>Sets an activity (some actions)'
       - '<aqua>an activity may be activated by triggers'
       - '<aqua>triggers may be associated to items (/it trigger)'
       - ''
@@ -246,7 +246,7 @@ itemtag:
     create:
       params: 'create <new id>'
       description:
-        - '<aqua>&lCreate a new activity'
+        - '<aqua><bold>Create a new activity'
         - ''
         - '<yellow><new id> <aqua>is the id of the activity'
         - "  <aqua>id must start with a letter and can be alphanumeric"
@@ -255,7 +255,7 @@ itemtag:
     rename:
       params: "rename <id> <new id>"
       description:
-        - '<aqua>&lRename activity id'
+        - '<aqua><bold>Rename activity id'
         - ''
         - '<yellow><id> <aqua>is the current id of the activity'
         - '<yellow><new id> <aqua>is the new id of the activity'
@@ -265,20 +265,20 @@ itemtag:
     open:
       params: "open <id>"
       description:
-        - '<aqua>&lOpen a gui to edit the activity'
+        - '<aqua><bold>Open a gui to edit the activity'
         - ''
         - '<yellow><id> <aqua>is the id of the activity'
     delete:
       params: "delete <id>"
       description:
-        - '<aqua>&lDelete selected activity'
+        - '<aqua><bold>Delete selected activity'
         - ''
         - '<yellow><id> <aqua>is the id of the activity'
       feedback: '<blue>[<white>ItemTag<blue>] <green>Activity <yellow>%id% <green>deleted'
     clone:
       params: "clone <id> <clone id>"
       description:
-        - '<aqua>&lClone selected activity'
+        - '<aqua><bold>Clone selected activity'
         - ''
         - '<yellow><id> <aqua>is the id of the activity to clone'
         - '<yellow><clone id> <aqua>is the id of the clone'
@@ -288,7 +288,7 @@ itemtag:
     setconsumes:
       params: "setconsumes <id> <amount>"
       description:
-        - '<aqua>&lSet uses required for selected activity'
+        - '<aqua><bold>Set uses required for selected activity'
         - ''
         - '<yellow><id> <aqua>is the id of the activity to clone'
         - '<yellow><amount> <aqua>amount of uses consumed by activity activation'
@@ -296,7 +296,7 @@ itemtag:
     addcondition:
       params: "addcondition <id> [!]<conditiontype> [condition info]"
       description:
-        - '<aqua>&lAdd a condition to activate the activity'
+        - '<aqua><bold>Add a condition to activate the activity'
         - ''
         - '<yellow><id> <aqua>is the id of the activity'
         - '<yellow>[!] <aqua>is the ''!'' if you want the condition to be reversed'
@@ -305,7 +305,7 @@ itemtag:
       feedback: '<blue>[<white>ItemTag<blue>] <green>Activity <yellow>%id% <green>added condition <yellow>%condition%'
   consumeactions:
     description:
-      - '<aqua>&lSets actions done when the item is consumed like food and drinks'
+      - '<aqua><bold>Sets actions done when the item is consumed like food and drinks'
       - ''
       - '<yellow>Add <type> <action> <aqua>- add selected action'
       - '<yellow>Set <line> <type> <action> <aqua>- replace action on chosen line'
@@ -319,14 +319,14 @@ itemtag:
     add:
       params: 'add <type> <action>'
       description:
-        - '<aqua>&lAdd selected action'
+        - '<aqua><bold>Add selected action'
         - ''
         - '<yellow><type> <aqua>type of action'
         - '<yellow><action> <aqua>additional info for action'
     addline:
       params: 'addline <line> <type> <action>'
       description:
-        - '<aqua>&lAdd selected action on selected line'
+        - '<aqua><bold>Add selected action on selected line'
         - ''
         - '<yellow><line> <aqua>line to add'
         - '<yellow><type> <aqua>type of action'
@@ -334,7 +334,7 @@ itemtag:
     set:
       params: 'set <line> <type> <action>'
       description:
-        - '<aqua>&lReplace action on selected line'
+        - '<aqua><bold>Replace action on selected line'
         - ''
         - '<yellow><line> <aqua>the line to replace'
         - '<yellow><type> <aqua>type of action'
@@ -342,19 +342,19 @@ itemtag:
     remove:
       params: 'remove <line>'
       description:
-        - '<aqua>&lRemove action on selected line'
+        - '<aqua><bold>Remove action on selected line'
         - ''
         - '<yellow><line> <aqua>the line to remove'
     permission:
       params: 'permission [permission]'
       description:
-        - '<aqua>&lSet permission to consume this item'
+        - '<aqua><bold>Set permission to consume this item'
         - ''
         - '<yellow>[permission] <aqua>the permission to set, by default none'
     cooldown:
       params: 'cooldown [ms]'
       description:
-        - '<aqua>&lSet a cooldown to consume an item again'
+        - '<aqua><bold>Set a cooldown to consume an item again'
         - ''
         - '<yellow>[ms] <aqua>how much time before being able to consume'
         - '     <aqua>the item again, by default 0'
@@ -364,7 +364,7 @@ itemtag:
     cooldownid:
       params: 'cooldownid [id]'
       description:
-        - '<aqua>&lSet a cooldown id for an item'
+        - '<aqua><bold>Set a cooldown id for an item'
         - ''
         - '<yellow>[id] <aqua>how much time before being able to consume the item again'
         - '<aqua>Note: cooldown is set based on cooldownid, different'
@@ -385,14 +385,14 @@ itemtag:
           removed: '<green>This item has no cooldown'
   effects:
     description:
-      - '<aqua>&lAdd Permanent potion effects'
+      - '<aqua><bold>Add Permanent potion effects'
       - '<aqua>Open a gui'
       - '<aqua>Remember to select which equipment'
       - '<aqua> slot apply the effect'
     params: ''
   usepermission:
     description:
-      - '<aqua>&lSet a permission to use this item (right click vanilla behavior)'
+      - '<aqua><bold>Set a permission to use this item (right click vanilla behavior)'
       - '<aqua>'
       - '<yellow>setpermission <permission> <aqua>set required permission'
       - '<yellow>setmessage <message> <aqua>set lack of permission message'
@@ -405,7 +405,7 @@ itemtag:
       feedback-reset: "<green>Use permission deny message has been removed"
   wearpermission:
     description:
-      - '<aqua>&lSet a permission to wear this item'
+      - '<aqua><bold>Set a permission to wear this item'
       - '<aqua>Attempting to wear the item will drop'
       - '<aqua>it to inventory, or on floor if full'
       - '<aqua>'
@@ -427,241 +427,241 @@ gui:
   previous-page:
     #Holders: %player_name% %page% %target_page%
     description:
-      - '<gold>&lPrevious Page'
+      - '<gold><bold>Previous Page'
       - ''
-      - '&7[<white>Click&7]<aqua> Go to page <yellow>%target_page%'
+      - '<gray>[<white>Click<gray>]<aqua> Go to page <yellow>%target_page%'
   next-page:
     #Holders: %player_name% %page% %target_page%
     description:
-      - '<gold>&lNext Page'
+      - '<gold><bold>Next Page'
       - ''
-      - '&7[<white>Click&7]<aqua> Go to page <yellow>%target_page%'
+      - '<gray>[<white>Click<gray>]<aqua> Go to page <yellow>%target_page%'
   back:
     #Holders: %player_name%
     description:
-      - '<gold>&lGo Back'
+      - '<gold><bold>Go Back'
       - ''
-      - '&7[<white>Click&7]<aqua> Go to previous gui'
+      - '<gray>[<white>Click<gray>]<aqua> Go to previous gui'
   actions:
     title: '<blue>Actions'
     click-interact: '<blue>[<white>ItemTag<blue>] <aqua>[Click here]'
     click-hover: '<gold>Click to suggest command'
     addline:
-      - '<gold>&lAdd Action'
+      - '<gold><bold>Add Action'
       - ''
-      - '&7[<white>Click&7]<aqua> Change values'
+      - '<gray>[<white>Click<gray>]<aqua> Change values'
       - '<blue>/it actions add <action type> <action info>'
       - '<blue>/it actions addline <line> <action type> <action info>'
     set:
-      - '<gold>&lSet Action'
+      - '<gold><bold>Set Action'
       - ''
-      - '&7[<white>Click&7]<aqua> Change values'
+      - '<gray>[<white>Click<gray>]<aqua> Change values'
       - '<blue>/it actions set <line> <action type> <action info>'
     remove:
-      - '<gold>&lRemove Action'
+      - '<gold><bold>Remove Action'
       - ''
-      - '&7[<white>Click&7]<aqua> Change values'
+      - '<gray>[<white>Click<gray>]<aqua> Change values'
       - '<blue>/it actions remove <line>'
     consume:
-      - '<gold>&lConsume on <yellow>&l0<gold>&l uses left'
+      - '<gold><bold>Consume on <yellow><bold>0<gold><bold> uses left'
       - '<aqua>Enabled: <yellow>%value%'
-      - '&7Note: when true and the item consume'
-      - '&7 it''s last use, the item is destroyed'
+      - '<gray>Note: when true and the item consume'
+      - '<gray> it''s last use, the item is destroyed'
       - ''
-      - '&7[<white>Click&7]<aqua> Toggle'
+      - '<gray>[<white>Click<gray>]<aqua> Toggle'
       - '<blue>/it actions consume [true/false]'
     uses:
-      - '<gold>&lAvailable Uses <yellow>&l%value%'
-      - '&7(-1 for Unlimited)'
+      - '<gold><bold>Available Uses <yellow><bold>%value%'
+      - '<gray>(-1 for Unlimited)'
       - ''
-      - '&7[<white>Right Click&7]<aqua> Add <yellow>%editor%'
-      - '&7[<white>Left Click&7]<aqua> Remove <yellow>%editor%'
-      - '&7[<white>Shift Left/Right Click&7]<aqua> %editor-prev% << <yellow>%editor% <aqua>>> %editor-next%'
+      - '<gray>[<white>Right Click<gray>]<aqua> Add <yellow>%editor%'
+      - '<gray>[<white>Left Click<gray>]<aqua> Remove <yellow>%editor%'
+      - '<gray>[<white>Shift Left/Right Click<gray>]<aqua> %editor-prev% << <yellow>%editor% <aqua>>> %editor-next%'
       - '<blue>/it actions uses <amount>'
     maxuses:
-      - '<gold>&lMax Uses <yellow>&l%value%'
-      - '&7(-1 for Unlimited)'
-      - '&7Mainly used for aesthetic purpose with Display Uses'
+      - '<gold><bold>Max Uses <yellow><bold>%value%'
+      - '<gray>(-1 for Unlimited)'
+      - '<gray>Mainly used for aesthetic purpose with Display Uses'
       - ''
-      - '&7[<white>Right Click&7]<aqua> Add <yellow>%editor%'
-      - '&7[<white>Left Click&7]<aqua> Remove <yellow>%editor%'
-      - '&7[<white>Shift Left/Right Click&7]<aqua> %editor-prev% << <yellow>%editor% <aqua>>> %editor-next%'
+      - '<gray>[<white>Right Click<gray>]<aqua> Add <yellow>%editor%'
+      - '<gray>[<white>Left Click<gray>]<aqua> Remove <yellow>%editor%'
+      - '<gray>[<white>Shift Left/Right Click<gray>]<aqua> %editor-prev% << <yellow>%editor% <aqua>>> %editor-next%'
       - '<blue>/it actions maxuses <amount>'
     permission:
-      - '<gold>&lPermission to use: <yellow>&l%value%'
-      - '&7Note: if you don''t have this permission'
-      - '&7 you won''t be able to use the item or'
-      - '&7 decrease it''s uses'
+      - '<gold><bold>Permission to use: <yellow><bold>%value%'
+      - '<gray>Note: if you don''t have this permission'
+      - '<gray> you won''t be able to use the item or'
+      - '<gray> decrease it''s uses'
       - ''
-      - '&7[<white>Click&7]<aqua> Edit'
+      - '<gray>[<white>Click<gray>]<aqua> Edit'
       - '<blue>/it actions permission [permission]'
     cooldown:
-      - '<gold>&lCooldown: <yellow>&l%value_s% <blue>s'
-      - '&7Note: apply a cooldown on right click uses'
+      - '<gold><bold>Cooldown: <yellow><bold>%value_s% <blue>s'
+      - '<gray>Note: apply a cooldown on right click uses'
       - ''
-      - '&7[<white>Right Click&7]<aqua> Add <yellow>%editor%'
-      - '&7[<white>Left Click&7]<aqua> Remove <yellow>%editor%'
-      - '&7[<white>Shift Left/Right Click&7]<aqua> %editor-prev% << <yellow>%editor% <aqua>>> %editor-next%'
-      - '<blue>/it actions cooldown <cooldown &nms<blue>>'
+      - '<gray>[<white>Right Click<gray>]<aqua> Add <yellow>%editor%'
+      - '<gray>[<white>Left Click<gray>]<aqua> Remove <yellow>%editor%'
+      - '<gray>[<white>Shift Left/Right Click<gray>]<aqua> %editor-prev% << <yellow>%editor% <aqua>>> %editor-next%'
+      - '<blue>/it actions cooldown <cooldown <u>ms</u>>'
     cooldownid:
-      - '<gold>&lCooldown id: <yellow>&l%value%'
-      - '&7Note: all items with same cooldownid'
-      - '&7 shares the cooldown'
+      - '<gold><bold>Cooldown id: <yellow><bold>%value%'
+      - '<gray>Note: all items with same cooldownid'
+      - '<gray> shares the cooldown'
       - ''
-      - '&7[<white>Click&7]<aqua> Edit'
+      - '<gray>[<white>Click<gray>]<aqua> Edit'
       - '<blue>/it actions cooldownid [cooldown id]'
     info:
-      - '<gold>&lList of Actions:'
+      - '<gold><bold>List of Actions:'
     visualcooldown:
-      - '<gold>&lDisplay visual cooldown'
+      - '<gold><bold>Display visual cooldown'
       - '<aqua>Enabled: <yellow>%value%'
-      - '&7Note: Unluckly this visual effect also'
-      - '&7 applies to any item of same kind'
+      - '<gray>Note: Unluckly this visual effect also'
+      - '<gray> applies to any item of same kind'
       - ''
-      - '&7[<white>Click&7]<aqua> Toggle'
+      - '<gray>[<white>Click<gray>]<aqua> Toggle'
       - '<blue>/it actions visualdisplay [true/false]'
     displayuses:
-      - '<gold>&lDisplay Uses left'
+      - '<gold><bold>Display Uses left'
       - '<aqua>Enabled: <yellow>%value%'
       - ''
-      - '&7[<white>Click&7]<aqua> Toggle'
+      - '<gray>[<white>Click<gray>]<aqua> Toggle'
       - '<blue>/it actions displayuses [true/false]'
   actionslines:
     actionformat: '<yellow>%type% <white>%info%'
     element:
       - '%action%'
-      - '&7[<white>Right Click&7]<aqua> Replace this action'
-      - '&7[<white>Left Click&7]<aqua> Add new action before this'
-      - '&7[<white>ShiftRight Click&7]<aqua> Delete this action'
+      - '<gray>[<white>Right Click<gray>]<aqua> Replace this action'
+      - '<gray>[<white>Left Click<gray>]<aqua> Add new action before this'
+      - '<gray>[<white>ShiftRight Click<gray>]<aqua> Delete this action'
     add:
       - ' '
-      - '&7[<white>Left Click&7]<aqua> Add new action'
+      - '<gray>[<white>Left Click<gray>]<aqua> Add new action'
   flags:
     placeable:
       - '<gold>Sets whether the item can be placed'
       - '<aqua>Value: <yellow>%value%'
       - ''
-      - '&7[<white>Click&7]<aqua> Toggle'
+      - '<gray>[<white>Click<gray>]<aqua> Toggle'
     usable:
       - '<gold>Sets whether the item can be used'
       - '<aqua>Value: <yellow>%value%'
       - ''
-      - '&7If set to false deny vanilla behavior of'
-      - '&7 right click of the item'
-      - '&7Definition of what use is vary on the item type'
-      - '&7Food can''t be eaten, fishing rod can''t fish,'
-      - '&7 eggs can''t thrown, spawner eggs can''t spawn...'
+      - '<gray>If set to false deny vanilla behavior of'
+      - '<gray> right click of the item'
+      - '<gray>Definition of what use is vary on the item type'
+      - '<gray>Food can''t be eaten, fishing rod can''t fish,'
+      - '<gray> eggs can''t thrown, spawner eggs can''t spawn...'
       - ''
-      - '&7[<white>Click&7]<aqua> Toggle'
+      - '<gray>[<white>Click<gray>]<aqua> Toggle'
     smelt:
       - '<gold>Sets whether the item can be cooked'
       - '<aqua>Value: <yellow>%value%'
       - ''
-      - '&7If set to false deny vanilla behavior'
-      - '&7 furnace cooking'
-      - '&7Works for both foods and ores'
+      - '<gray>If set to false deny vanilla behavior'
+      - '<gray> furnace cooking'
+      - '<gray>Works for both foods and ores'
       - ''
-      - '&7[<white>Click&7]<aqua> Toggle'
+      - '<gray>[<white>Click<gray>]<aqua> Toggle'
     furnacefuel:
       - '<gold>Sets whether the item can be used as furnace fuel'
       - '<aqua>Value: <yellow>%value%'
       - ''
-      - '&7If set to false deny vanilla behavior of'
-      - '&7 furnaces consuming this item as fuel'
+      - '<gray>If set to false deny vanilla behavior of'
+      - '<gray> furnaces consuming this item as fuel'
       - ''
-      - '&7[<white>Click&7]<aqua> Toggle'
+      - '<gray>[<white>Click<gray>]<aqua> Toggle'
     recipeingredient:
       - '<gold>Sets whether the item can be used on crafting recipes'
       - '<aqua>Value: <yellow>%value%'
       - ''
-      - '&7If set to false deny vanilla crafting behavior'
-      - '&7 when this item is one of the ingredients'
+      - '<gray>If set to false deny vanilla crafting behavior'
+      - '<gray> when this item is one of the ingredients'
       - ''
-      - '&7[<white>Click&7]<aqua> Toggle'
+      - '<gray>[<white>Click<gray>]<aqua> Toggle'
     enchantable:
       - '<gold>Sets whether the item can be enchanted'
       - '<aqua>Value: <yellow>%value%'
       - ''
-      - '&7If set to false deny vanilla enchanting table'
-      - '&7 behavior on this item'
+      - '<gray>If set to false deny vanilla enchanting table'
+      - '<gray> behavior on this item'
       - ''
-      - '&7[<white>Click&7]<aqua> Toggle'
+      - '<gray>[<white>Click<gray>]<aqua> Toggle'
     renamable:
       - '<gold>Sets whether the item can be used on anvil'
       - '<aqua>Value: <yellow>%value%'
       - ''
-      - '&7If set to false deny vanilla anvil behavior'
-      - '&7 on this item'
+      - '<gray>If set to false deny vanilla anvil behavior'
+      - '<gray> on this item'
       - ''
-      - '&7[<white>Click&7]<aqua> Toggle'
+      - '<gray>[<white>Click<gray>]<aqua> Toggle'
     grindable:
       - '<gold>Sets whether the item can be disenchanted on grindstone'
       - '<aqua>Value: <yellow>%value%'
       - ''
-      - '&7If set to false deny vanilla grindstone'
-      - '&7 behavior on this item'
+      - '<gray>If set to false deny vanilla grindstone'
+      - '<gray> behavior on this item'
       - ''
-      - '&7[<white>Click&7]<aqua> Toggle'
+      - '<gray>[<white>Click<gray>]<aqua> Toggle'
     equipment:
       - '<gold>Sets whether the item can be used as equipment'
       - '<aqua>Value: <yellow>%value%'
       - ''
-      - '&7If set to false and item is equipped, it would be dropped'
-      - '&7 back into player inventory'
-      - '&7NB: hand and off hand are not considered part of equipment slots'
+      - '<gray>If set to false and item is equipped, it would be dropped'
+      - '<gray> back into player inventory'
+      - '<gray>NB: hand and off hand are not considered part of equipment slots'
       - ''
-      - '&7[<white>Click&7]<aqua> Toggle'
+      - '<gray>[<white>Click<gray>]<aqua> Toggle'
     entityfood:
       - '<gold>Sets whether the item can be used as animal''s food'
       - '<aqua>Value: <yellow>%value%'
       - ''
-      - '&7If set to false deny vanilla breed behavior'
-      - '&7 and also baby fast grow behavior'
-      - '&7 on this item'
+      - '<gray>If set to false deny vanilla breed behavior'
+      - '<gray> and also baby fast grow behavior'
+      - '<gray> on this item'
       - ''
-      - '&7[<white>Click&7]<aqua> Toggle'
+      - '<gray>[<white>Click<gray>]<aqua> Toggle'
     vanishcurse:
       - '<gold>Sets whether the item disappear on death'
       - '<aqua>Value: <yellow>%value%'
       - ''
-      - '&7Works exactly as the enchantment Vanish Curse'
-      - '&7But it''s not an enchantment'
+      - '<gray>Works exactly as the enchantment Vanish Curse'
+      - '<gray>But it''s not an enchantment'
       - ''
-      - '&7[<white>Click&7]<aqua> Toggle'
+      - '<gray>[<white>Click<gray>]<aqua> Toggle'
     clickmove:
       - '<gold>Sets whether the item can be moved on inventory'
       - '<aqua>Value: <yellow>%value%'
       - ''
-      - '&7Op players have permission to bypass that limit'
+      - '<gray>Op players have permission to bypass that limit'
       - ''
-      - '&7[<white>Click&7]<aqua> Toggle'
+      - '<gray>[<white>Click<gray>]<aqua> Toggle'
     tradeable:
       - '<gold>Sets whether the item can be traded for other items with villagers'
       - '<aqua>Value: <yellow>%value%'
       - ''
-      - '&7If set to false deny vanilla trading behavior'
+      - '<gray>If set to false deny vanilla trading behavior'
       - ''
-      - '&7[<white>Click&7]<aqua> Toggle'
+      - '<gray>[<white>Click<gray>]<aqua> Toggle'
     smithing_table:
       - '<gold>Sets whether the item can be used on smithing table'
       - '<aqua>Value: <yellow>%value%'
       - ''
-      - '&7If set to false deny vanilla anvil behavior'
-      - '&7 on this item'
+      - '<gray>If set to false deny vanilla anvil behavior'
+      - '<gray> on this item'
       - ''
-      - '&7[<white>Click&7]<aqua> Toggle'
+      - '<gray>[<white>Click<gray>]<aqua> Toggle'
   effects:
     title: '<blue>Effects'
     slot:
-      - '<gold>&l%slot%'
+      - '<gold><bold>%slot%'
       - '<aqua>Enabled: <yellow>%value%'
     potion:
-      - '<gold>&l%effect%'
+      - '<gold><bold>%effect%'
       - ''
-      - '<aqua>Level: <yellow>%level% &7[Left/Right Click Change]'
-      - '<aqua>Particles: <yellow>%particles% &7[ShiftLeft Click Toggle]'
-      - '<aqua>Ambient: <yellow>%ambient% &7[ShiftRight Click Toggle]'
-      - '<aqua>Icon: <yellow>%icon% &7[%middle_click% Toggle]'
+      - '<aqua>Level: <yellow>%level% <gray>[Left/Right Click Change]'
+      - '<aqua>Particles: <yellow>%particles% <gray>[ShiftLeft Click Toggle]'
+      - '<aqua>Ambient: <yellow>%ambient% <gray>[ShiftRight Click Toggle]'
+      - '<aqua>Icon: <yellow>%icon% <gray>[%middle_click% Toggle]'
       - '<aqua>Duration: <yellow>%duration%'
     potion-instant: 'instant'
     potion-unlimited: 'unlimited'
