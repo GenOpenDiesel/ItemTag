@@ -52,12 +52,12 @@ public abstract class EquipmentChangeListenerBase implements Listener {
 
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST)
     private void event(PlayerJoinEvent event) {
         trackPlayer(event.getPlayer());
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.MONITOR)
     private void event(PlayerQuitEvent event) {
         untrackPlayer(event.getPlayer());
     }
@@ -407,8 +407,9 @@ public abstract class EquipmentChangeListenerBase implements Listener {
         if (!equips.containsKey(p))
             return false;
         EnumMap<EquipmentSlot, ItemStack> map = equips.get(p);
-        for (EquipmentSlot slot : map.keySet())
+        for (EquipmentSlot slot : map.keySet()) {
             onEquipChange(p, EquipmentChangeEvent.EquipMethod.QUIT, slot, map.get(slot), null);
+        }
         equips.remove(p);
         return true;
     }
@@ -420,7 +421,7 @@ public abstract class EquipmentChangeListenerBase implements Listener {
         @Override
         public void run() {
             if (subTask == null)// || subTask.isCancelled())
-                if (!Bukkit.getOnlinePlayers().isEmpty()) {
+                if (!equips.isEmpty()) {
                     subTask = new TimerCheckTask.PlayerCheck();
                     subTask.runTaskTimer(ItemTag.get(), 1L, 1L);
                 }
@@ -439,7 +440,7 @@ public abstract class EquipmentChangeListenerBase implements Listener {
             private int index = 0;
 
             private PlayerCheck() {
-                players.addAll(Bukkit.getOnlinePlayers());
+                players.addAll(equips.keySet());
             }
 
             @Override
@@ -454,8 +455,12 @@ public abstract class EquipmentChangeListenerBase implements Listener {
                     }
                     Player p = players.get(index);
                     index++;
-                    if (!p.isOnline())
+                    if (!p.isOnline()) {
+                        if (untrackPlayer(p)) {
+                            ItemTag.get().log("Player " + p.getName() + " is not online");
+                        }
                         continue;
+                    }
                     if (p.hasMetadata("BOT"))
                         continue;
                     trackPlayer(p);
