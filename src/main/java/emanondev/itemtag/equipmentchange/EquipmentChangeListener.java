@@ -9,9 +9,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockDispenseArmorEvent;
 import org.bukkit.event.entity.EntityPickupItemEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.PlayerSwapHandItemsEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
@@ -20,8 +22,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 
 public class EquipmentChangeListener extends EquipmentChangeListenerBase {
+
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void event(InventoryClickEvent event) {
+    private void event(InventoryClickEvent event) {
         ItemTag.get().log(event.getAction().name());
         if (!(event.getWhoClicked() instanceof Player))
             return;
@@ -132,6 +135,90 @@ public class EquipmentChangeListener extends EquipmentChangeListenerBase {
         }
     }
 
+    public boolean isSimilarIgnoreDamage(ItemStack item, ItemStack item2) {
+        if (ItemUtils.isAirOrNull(item))
+            return ItemUtils.isAirOrNull(item2);
+        if (ItemUtils.isAirOrNull(item2))
+            return false;
+        if (item.isSimilar(item2))
+            return true;
+        if (item.getType() != item2.getType())
+            return false;
+        ItemMeta meta1 = item.getItemMeta();
+        if (!(meta1 instanceof Damageable))
+            return false;
+        ItemMeta meta2 = item2.getItemMeta();
+        if (meta1.isUnbreakable() || meta2.isUnbreakable())
+            return false;
+        ((Damageable) meta2).setDamage(((Damageable) meta1).getDamage());
+        return meta1.equals(meta2);
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    private void event(PlayerJoinEvent event) {
+        handle(event);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    private void event(PlayerQuitEvent event) {
+        handle(event);
+    }
+
+    @EventHandler
+    private void event(PlayerDeathEvent event) {
+        handle(event);
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    private void event(PlayerTeleportEvent event) {
+        handle(event);
+    }
+
+    @EventHandler
+    private void event(PlayerRespawnEvent event) {
+        handle(event);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    private void event(InventoryDragEvent event) {
+        handle(event);
+    }
+
+    @EventHandler
+    private void event(PlayerItemBreakEvent event) {
+        handle(event);
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    private void event(PlayerArmorStandManipulateEvent event) {
+        handle(event);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    private void event(PlayerDropItemEvent event) {
+        handle(event);
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    private void event(PlayerInteractEntityEvent event) {
+        handle(event);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR) // compability -> !=priority
+    private void event(PlayerInteractEvent event) {
+        handle(event);
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    private void event(PlayerItemConsumeEvent event) {
+        handle(event);
+    }
+
+    @EventHandler
+    private void event(PlayerItemHeldEvent event) {
+        handle(event);
+    }
+
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     private void event(PlayerSwapHandItemsEvent event) {
         if (event.getPlayer().hasMetadata("NPC"))
@@ -170,24 +257,5 @@ public class EquipmentChangeListener extends EquipmentChangeListenerBase {
             if (ItemUtils.isAirOrNull(p.getInventory().getItem(i)))
                 return;
         new SlotCheck(p, EquipmentChangeEvent.EquipMethod.PICKUP, EquipmentSlot.HAND).runTaskLater(ItemTag.get(), 1L);
-    }
-
-    public boolean isSimilarIgnoreDamage(ItemStack item, ItemStack item2) {
-        if (ItemUtils.isAirOrNull(item))
-            return ItemUtils.isAirOrNull(item2);
-        if (ItemUtils.isAirOrNull(item2))
-            return false;
-        if (item.isSimilar(item2))
-            return true;
-        if (item.getType() != item2.getType())
-            return false;
-        ItemMeta meta1 = item.getItemMeta();
-        if (!(meta1 instanceof Damageable))
-            return false;
-        ItemMeta meta2 = item2.getItemMeta();
-        if (meta1.isUnbreakable() || meta2.isUnbreakable())
-            return false;
-        ((Damageable) meta2).setDamage(((Damageable) meta1).getDamage());
-        return meta1.equals(meta2);
     }
 }

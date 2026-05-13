@@ -6,9 +6,11 @@ import emanondev.itemtag.ItemTag;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -17,6 +19,90 @@ import java.util.ArrayList;
 
 public class EquipmentChangeListenerUpTo1_8 extends EquipmentChangeListenerBase {
 
+    @SuppressWarnings("deprecation")
+    public boolean isSimilarIgnoreDamage(ItemStack item, ItemStack item2) {
+        if (ItemUtils.isAirOrNull(item))
+            return ItemUtils.isAirOrNull(item2);
+        if (ItemUtils.isAirOrNull(item2))
+            return false;
+        if (item.isSimilar(item2))
+            return true;
+        if (item.getType() != item2.getType())
+            return false;
+        ItemMeta meta1 = ItemUtils.getMeta(item);
+        ItemMeta meta2 = ItemUtils.getMeta(item2);
+        if (isUbreakable(meta1) || isUbreakable(meta2))
+            return false;
+        ItemStack itemCopy = item.clone();
+        ItemStack itemCopy2 = item2.clone();
+        itemCopy.setDurability(itemCopy2.getDurability());
+        return itemCopy.isSimilar(itemCopy2);
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    private void event(PlayerJoinEvent event) {
+        handle(event);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    private void event(PlayerQuitEvent event) {
+        handle(event);
+    }
+
+    @EventHandler
+    private void event(PlayerDeathEvent event) {
+        handle(event);
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    private void event(PlayerTeleportEvent event) {
+        handle(event);
+    }
+
+    @EventHandler
+    private void event(PlayerRespawnEvent event) {
+        handle(event);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    private void event(InventoryDragEvent event) {
+        handle(event);
+    }
+
+    @EventHandler
+    private void event(PlayerItemBreakEvent event) {
+        handle(event);
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    private void event(PlayerArmorStandManipulateEvent event) {
+        handle(event);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    private void event(PlayerDropItemEvent event) {
+        handle(event);
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    private void event(PlayerInteractEntityEvent event) {
+        handle(event);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR) // compability -> !=priority
+    private void event(PlayerInteractEvent event) {
+        handle(event);
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    private void event(PlayerItemConsumeEvent event) {
+        handle(event);
+    }
+
+    @EventHandler
+    private void event(PlayerItemHeldEvent event) {
+        handle(event);
+    }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void event(final InventoryClickEvent event) {
@@ -139,26 +225,6 @@ public class EquipmentChangeListenerUpTo1_8 extends EquipmentChangeListenerBase 
             if (ItemUtils.isAirOrNull(event.getPlayer().getInventory().getItem(i)))
                 return;
         new SlotCheck(event.getPlayer(), EquipmentChangeEvent.EquipMethod.PICKUP, EquipmentSlot.HAND).runTaskLater(ItemTag.get(), 1L);
-    }
-
-    @SuppressWarnings("deprecation")
-    public boolean isSimilarIgnoreDamage(ItemStack item, ItemStack item2) {
-        if (ItemUtils.isAirOrNull(item))
-            return ItemUtils.isAirOrNull(item2);
-        if (ItemUtils.isAirOrNull(item2))
-            return false;
-        if (item.isSimilar(item2))
-            return true;
-        if (item.getType() != item2.getType())
-            return false;
-        ItemMeta meta1 = ItemUtils.getMeta(item);
-        ItemMeta meta2 = ItemUtils.getMeta(item2);
-        if (isUbreakable(meta1) || isUbreakable(meta2))
-            return false;
-        ItemStack itemCopy = item.clone();
-        ItemStack itemCopy2 = item2.clone();
-        itemCopy.setDurability(itemCopy2.getDurability());
-        return itemCopy.isSimilar(itemCopy2);
     }
 
     private boolean isUbreakable(ItemMeta meta) {

@@ -12,8 +12,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
 import org.bukkit.event.Event;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
@@ -36,34 +34,68 @@ public abstract class EquipmentChangeListenerBase implements Listener {
     private TimerCheckTask timerTask = null;
 
     public void reload() {
-        if (timerTask != null)
+        if (timerTask != null) {
             timerTask.cancel();
+        }
         long timerCheckFrequencyTicks = Math.max(5, ItemTag.get().getConfig().getInteger("equipment_change.frequency_ticks", 10));
         maxCheckedPlayerPerTick = Math.max(1, ItemTag.get().getConfig().getInteger("equipment_change.max_checked_players_per_tick", 5));
-        for (Player p : equips.keySet())
+        for (Player p : equips.keySet()) {
             untrackPlayer(p);
+        }
 
         equips.clear();
-        for (Player p : Bukkit.getOnlinePlayers())
+        for (Player p : Bukkit.getOnlinePlayers()) {
             trackPlayer(p);
+        }
 
         timerTask = new TimerCheckTask();
         timerTask.runTaskTimer(ItemTag.get(), timerCheckFrequencyTicks, timerCheckFrequencyTicks);
 
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
-    private void event(PlayerJoinEvent event) {
+    public abstract boolean isSimilarIgnoreDamage(ItemStack item, ItemStack item2);
+
+    public void onEquipChange(Player p,
+                              EquipmentChangeEvent.EquipMethod reason,
+                              @NotNull EquipmentSlot type,
+                              ItemStack oldItem,
+                              ItemStack newItem) {
+        equips.get(p).put(type, ItemUtils.isAirOrNull(newItem) ? null : new ItemStack(newItem));
+        Bukkit.getPluginManager().callEvent(new EquipmentChangeEvent(p, reason, type, oldItem, newItem));
+    }
+
+    public boolean trackPlayer(Player p) {
+        if (equips.containsKey(p))
+            return false;
+        EnumMap<EquipmentSlot, ItemStack> map = new EnumMap<>(EquipmentSlot.class);
+        equips.put(p, map);
+        for (EquipmentSlot slot : ItemTagUtility.getPlayerEquipmentSlots()) {
+            map.put(slot, null);
+            onEquipChange(p, EquipmentChangeEvent.EquipMethod.JOIN, slot, null, getEquip(p, slot));
+        }
+        return true;
+    }
+
+    public boolean untrackPlayer(Player p) {
+        if (!equips.containsKey(p))
+            return false;
+        EnumMap<EquipmentSlot, ItemStack> map = equips.get(p);
+        for (EquipmentSlot slot : map.keySet()) {
+            onEquipChange(p, EquipmentChangeEvent.EquipMethod.QUIT, slot, map.get(slot), null);
+        }
+        equips.remove(p);
+        return true;
+    }
+
+    protected void handle(PlayerJoinEvent event) {
         trackPlayer(event.getPlayer());
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
-    private void event(PlayerQuitEvent event) {
+    protected void handle(PlayerQuitEvent event) {
         untrackPlayer(event.getPlayer());
     }
 
-    @EventHandler
-    private void event(PlayerDeathEvent event) {
+    protected void handle(PlayerDeathEvent event) {
         if (event.getEntity().hasMetadata("NPC") || event.getEntity().hasMetadata("BOT"))
             return;
         for (EquipmentSlot type : ItemTagUtility.getPlayerEquipmentSlots()) {
@@ -73,8 +105,7 @@ public abstract class EquipmentChangeListenerBase implements Listener {
         }
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-    private void event(PlayerTeleportEvent event) {
+    protected void handle(PlayerTeleportEvent event) {
         if (event.getPlayer().hasMetadata("NPC") || event.getPlayer().hasMetadata("BOT"))
             return;
         if (!equips.containsKey(event.getPlayer()))
@@ -83,8 +114,7 @@ public abstract class EquipmentChangeListenerBase implements Listener {
                 .runTaskLater(ItemTag.get(), 1L);
     }
 
-    @EventHandler
-    private void event(PlayerRespawnEvent event) {
+    protected void handle(PlayerRespawnEvent event) {
         if (event.getPlayer().hasMetadata("NPC") || event.getPlayer().hasMetadata("BOT"))
             return;
         for (EquipmentSlot type : ItemTagUtility.getPlayerEquipmentSlots()) {
@@ -94,8 +124,7 @@ public abstract class EquipmentChangeListenerBase implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    private void event(InventoryDragEvent event) {
+    protected void handle(InventoryDragEvent event) {
         if (!(event.getWhoClicked() instanceof Player))
             return;
         if (event.getWhoClicked().hasMetadata("NPC") || event.getWhoClicked().hasMetadata("BOT"))
@@ -112,8 +141,7 @@ public abstract class EquipmentChangeListenerBase implements Listener {
         }
     }
 
-    @EventHandler
-    private void event(PlayerItemBreakEvent e) {
+    protected void handle(PlayerItemBreakEvent e) {
         if (e.getPlayer().hasMetadata("NPC") || e.getPlayer().hasMetadata("BOT"))
             return;
         ArrayList<EquipmentSlot> slots = new ArrayList<>();
@@ -130,8 +158,7 @@ public abstract class EquipmentChangeListenerBase implements Listener {
         new SlotCheck(e.getPlayer(), EquipmentChangeEvent.EquipMethod.BROKE, slots).runTaskLater(ItemTag.get(), 1L);
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-    private void event(PlayerArmorStandManipulateEvent event) {
+    protected void handle(PlayerArmorStandManipulateEvent event) {
         if (event.getPlayer().hasMetadata("NPC") || event.getPlayer().hasMetadata("BOT"))
             return;
         if (isSimilarIgnoreDamage(event.getArmorStandItem(), event.getPlayerItem()))
@@ -140,8 +167,7 @@ public abstract class EquipmentChangeListenerBase implements Listener {
                 event.getArmorStandItem());
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
-    private void event(PlayerDropItemEvent event) {
+    protected void handle(PlayerDropItemEvent event) {
         if (event.getPlayer().hasMetadata("NPC") || event.getPlayer().hasMetadata("BOT"))
             return;
         if (clickDrop.remove(event.getPlayer()))
@@ -153,8 +179,7 @@ public abstract class EquipmentChangeListenerBase implements Listener {
                     null);
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-    private void event(PlayerInteractEntityEvent event) {
+    protected void handle(PlayerInteractEntityEvent event) {
         if (event.getPlayer().hasMetadata("NPC") || event.getPlayer().hasMetadata("BOT"))
             return;
         EquipmentSlot slot;
@@ -193,8 +218,7 @@ public abstract class EquipmentChangeListenerBase implements Listener {
         new SlotCheck(event.getPlayer(), EquipmentChangeEvent.EquipMethod.USE_ON_ENTITY, slot).runTaskLater(ItemTag.get(), 1L);
     }
 
-    @EventHandler(priority = EventPriority.MONITOR) // compability -> !=priority
-    private void event(PlayerInteractEvent e) {
+    protected void handle(PlayerInteractEvent e) {
         if (ItemUtils.isAirOrNull(e.getItem()))
             return;
         if (e.useItemInHand() == Event.Result.DENY)
@@ -230,8 +254,7 @@ public abstract class EquipmentChangeListenerBase implements Listener {
 
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-    private void event(PlayerItemConsumeEvent event) {
+    protected void handle(PlayerItemConsumeEvent event) {
         if (event.getPlayer().hasMetadata("NPC") || event.getPlayer().hasMetadata("BOT"))
             return;
         if (event.getItem().getAmount() != 1)
@@ -253,8 +276,7 @@ public abstract class EquipmentChangeListenerBase implements Listener {
                         Arrays.asList(EquipmentSlot.HAND, EquipmentSlot.OFF_HAND)).runTaskLater(ItemTag.get(), 1L);
     }
 
-    @EventHandler
-    private void event(PlayerItemHeldEvent event) {
+    protected void handle(PlayerItemHeldEvent event) {
         if (event.getPlayer().hasMetadata("NPC") || event.getPlayer().hasMetadata("BOT"))
             return;
         ItemStack i1 = event.getPlayer().getInventory().getItem(event.getPreviousSlot());
@@ -265,8 +287,6 @@ public abstract class EquipmentChangeListenerBase implements Listener {
             return;
         onEquipChange(event.getPlayer(), EquipmentChangeEvent.EquipMethod.HOTBAR_HAND_CHANGE, EquipmentSlot.HAND, i1, i2);
     }
-
-    public abstract boolean isSimilarIgnoreDamage(ItemStack item, ItemStack item2);
 
     @SuppressWarnings({"incomplete-switch", "deprecation"})
     protected ItemStack getEquip(Player p, EquipmentSlot slot) {
@@ -292,15 +312,6 @@ public abstract class EquipmentChangeListenerBase implements Listener {
             return p.getInventory().getItemInOffHand();
         }
         return null;
-    }
-
-    public void onEquipChange(Player p,
-                              EquipmentChangeEvent.EquipMethod reason,
-                              @NotNull EquipmentSlot type,
-                              ItemStack oldItem,
-                              ItemStack newItem) {
-        equips.get(p).put(type, ItemUtils.isAirOrNull(newItem) ? null : new ItemStack(newItem));
-        Bukkit.getPluginManager().callEvent(new EquipmentChangeEvent(p, reason, type, oldItem, newItem));
     }
 
     protected EquipmentSlot guessRightClickSlotType(ItemStack item) {
@@ -391,29 +402,6 @@ public abstract class EquipmentChangeListenerBase implements Listener {
                 : null;
     }
 
-    public boolean trackPlayer(Player p) {
-        if (equips.containsKey(p))
-            return false;
-        EnumMap<EquipmentSlot, ItemStack> map = new EnumMap<>(EquipmentSlot.class);
-        equips.put(p, map);
-        for (EquipmentSlot slot : ItemTagUtility.getPlayerEquipmentSlots()) {
-            map.put(slot, null);
-            onEquipChange(p, EquipmentChangeEvent.EquipMethod.JOIN, slot, null, getEquip(p, slot));
-        }
-        return true;
-    }
-
-    public boolean untrackPlayer(Player p) {
-        if (!equips.containsKey(p))
-            return false;
-        EnumMap<EquipmentSlot, ItemStack> map = equips.get(p);
-        for (EquipmentSlot slot : map.keySet()) {
-            onEquipChange(p, EquipmentChangeEvent.EquipMethod.QUIT, slot, map.get(slot), null);
-        }
-        equips.remove(p);
-        return true;
-    }
-
     private class TimerCheckTask extends BukkitRunnable {
 
         private TimerCheckTask.PlayerCheck subTask = null;
@@ -456,9 +444,7 @@ public abstract class EquipmentChangeListenerBase implements Listener {
                     Player p = players.get(index);
                     index++;
                     if (!p.isOnline()) {
-                        if (untrackPlayer(p)) {
-                            ItemTag.get().log("Player " + p.getName() + " is not online");
-                        }
+                        untrackPlayer(p);
                         continue;
                     }
                     if (p.hasMetadata("BOT"))
