@@ -646,7 +646,7 @@ gui:
       - '&6Sets whether the item can be used on smithing table'
       - '&bValue: &e%value%'
       - ''
-      - '&7If set to false deny vanilla anvil behavior'
+      - '&7If set to false deny vanilla smithing table behavior'
       - '&7 on this item'
       - ''
       - '&7[&fClick&7]&b Toggle'

@@ -569,8 +569,8 @@ gui:
       - '&6Establece si el objeto puede usarse en la mesa de herrería'
       - '&bValor: &e%value%'
       - ''
-      - '&7Si se establece en falso, se deniega el comportamiento'
-      - '&7 por defecto del yunque con este objeto'
+      - '&7Si se establece en false, desactiva el comportamiento vanilla'
+      - '&7 de la mesa de herrería en este objeto'
       - ''
       - '&7[&fClick&7]&b Alternar'
   effects:

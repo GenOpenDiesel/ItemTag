@@ -566,8 +566,8 @@ gui:
       - '&6Define se o item pode ser usado na mesa de ferraria'
       - '&bValor: &e%value%'
       - ''
-      - '&7Se definido como falso, impede o comportamento padrão'
-      - '&7 da bigorna com este item'
+      - '&7Se definido como false, desativa o comportamento vanilla'
+      - '&7 da mesa de ferraria neste item'
       - ''
       - '&7[&fClick&7]&b Alternar'
   effects:
