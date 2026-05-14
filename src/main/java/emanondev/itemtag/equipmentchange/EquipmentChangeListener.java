@@ -25,7 +25,6 @@ public class EquipmentChangeListener extends EquipmentChangeListenerBase {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void event(InventoryClickEvent event) {
-        ItemTag.get().log(event.getAction().name());
         if (!(event.getWhoClicked() instanceof Player))
             return;
         if (event.getWhoClicked().hasMetadata("NPC") || event.getWhoClicked().hasMetadata("BOT"))

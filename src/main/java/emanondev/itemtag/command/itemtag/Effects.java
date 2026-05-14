@@ -280,11 +280,10 @@ public class Effects extends ListenerSubCmd {
                         continue;
                     //if the new item has some active effects
                     for (PotionEffect effect : newInfo.getEffects()) {
-                        ItemTag.get().log(effect.getType() + " " + effect.getAmplifier() + 1);
-                        if (effect.getType().isInstant() || !event.getPlayer().hasPotionEffect(effect.getType()))
+                        //ItemTag.get().log(effect.getType() + " " + effect.getAmplifier() + 1);
+                        if (effect.getType().isInstant() || !event.getPlayer().hasPotionEffect(effect.getType())) {
                             addEffect(event.getPlayer(), effect.getType(), effect);
-
-                        else {
+                        } else {
                             PotionEffect currentEffect = null;
                             if (VersionUtils.isVersionAfter(1, 11))// safe
                                 currentEffect = event.getPlayer().getPotionEffect(effect.getType());

@@ -39,7 +39,7 @@ public abstract class EquipmentChangeListenerBase implements Listener {
         }
         long timerCheckFrequencyTicks = Math.max(5, ItemTag.get().getConfig().getInteger("equipment_change.frequency_ticks", 10));
         maxCheckedPlayerPerTick = Math.max(1, ItemTag.get().getConfig().getInteger("equipment_change.max_checked_players_per_tick", 5));
-        for (Player p : equips.keySet()) {
+        for (Player p : new ArrayList<>(equips.keySet())) {
             untrackPlayer(p);
         }
 
