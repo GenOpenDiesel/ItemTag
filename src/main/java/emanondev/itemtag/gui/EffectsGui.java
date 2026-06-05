@@ -249,7 +249,7 @@ public class EffectsGui implements PagedGui {
                             .replace("_", " "), "%level%", String.valueOf(amplifier + 1), "%particles%", Aliases.BOOLEAN.getName(particles),
                     "%ambient%", Aliases.BOOLEAN.getName(ambient), "%icon%",
                     VersionUtils.isVersionAfter(1, 13) ? Aliases.BOOLEAN.getName(icon) : getLanguageMessage("gui.effects.icon-unsupported"), "%duration%",
-                    getLanguageMessage(type.isInstant() ? "gui.effects.potion-instant" : "gui.effects.potion-unlimited"),
+                    getLanguageMessage(/*type.isInstant() ? "gui.effects.potion-instant" : */"gui.effects.potion-unlimited"),
                     "%middle_click%", getLanguageMessage("gui.middleclick." + (getTargetPlayer().getGameMode() == GameMode.CREATIVE ? "creative" : "other")));
             item.setAmount(Math.max(1, amplifier + 1));
             meta.clearCustomEffects();

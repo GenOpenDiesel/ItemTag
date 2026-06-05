@@ -222,7 +222,7 @@ public class Effects extends ListenerSubCmd {
         if (!ignoreInstant)
             return info.getEffectsMap();
         HashMap<PotionEffectType, PotionEffect> map = new HashMap<>(info.getEffectsMap());
-        map.entrySet().removeIf(e -> e.getKey().isInstant());
+        //map.entrySet().removeIf(e -> e.getKey().isInstant());
         return map;
     }
 
@@ -252,10 +252,10 @@ public class Effects extends ListenerSubCmd {
         HashSet<PotionEffectType> keys = new HashSet<>(oldEffects.keySet());
         keys.addAll(newEffects.keySet());
         keys.forEach((k) -> {
-            if (k.isInstant()) {
+            /*if (k.isInstant()) {
                 addEffect(event.getPlayer(), k, newEffects.get(k));
                 return;
-            }
+            }*/
             int newAmplifier = getAmplifier(newEffects, k);
             int oldAmplifier = getAmplifier(oldEffects, k);
             int equipAmplifier = getAmplifier(equipsEffects, k);
@@ -281,7 +281,7 @@ public class Effects extends ListenerSubCmd {
                     //if the new item has some active effects
                     for (PotionEffect effect : newInfo.getEffects()) {
                         //ItemTag.get().log(effect.getType() + " " + effect.getAmplifier() + 1);
-                        if (effect.getType().isInstant() || !event.getPlayer().hasPotionEffect(effect.getType())) {
+                        if (/*effect.getType().isInstant() ||*/ !event.getPlayer().hasPotionEffect(effect.getType())) {
                             addEffect(event.getPlayer(), effect.getType(), effect);
                         } else {
                             PotionEffect currentEffect = null;
@@ -312,10 +312,10 @@ public class Effects extends ListenerSubCmd {
             target.removePotionEffect(type);
             return;
         }
-        if (type.isInstant()) {
+        /*if (type.isInstant()) {
             target.addPotionEffect(effect);
             return;
-        }
+        }*/
         if (VersionUtils.isVersionAfter(1, 16)) {
             if (target.hasPotionEffect(effect.getType()))
                 target.removePotionEffect(effect.getType());

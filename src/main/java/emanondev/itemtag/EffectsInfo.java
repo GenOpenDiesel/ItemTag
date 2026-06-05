@@ -38,7 +38,7 @@ public class EffectsInfo {
     public static PotionEffect craftPotionEffect(PotionEffectType type, int amplifier, boolean ambient,
                                                  boolean particles,
                                                  boolean icon) {
-        int duration = type.isInstant() ? 1 : (VersionUtils.isVersionUpTo(1, 19, 3) ?
+        int duration = /*type.isInstant() ? 1 :*/ (VersionUtils.isVersionUpTo(1, 19, 3) ?
                 (20 * 3600 * 12) : PotionEffect.INFINITE_DURATION);
         if (VersionUtils.isVersionAfter(1, 13)) {
             return new PotionEffect(type, duration, amplifier, ambient, particles, icon);
